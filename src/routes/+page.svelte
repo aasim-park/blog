@@ -19,7 +19,6 @@
 
 		To my blogs/portfolio website
 	</h1>
-
 </section>
 
 <style>
