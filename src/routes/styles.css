@@ -70,6 +70,7 @@ pre {
 }
 
 .text-column {
+	font-family: Roboto;
 	display: flex;
 	max-width: 48rem;
 	flex: 0.6;
