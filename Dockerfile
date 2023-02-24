@@ -7,6 +7,9 @@ COPY . .
 
 RUN npm i
 
+
+RUN echo "The ARG variable value is $SECRET_DB_URL"
+
 RUN npm run build
 
 # server node
@@ -16,6 +19,8 @@ WORKDIR /app
 
 COPY --from=build /app/package.json .
 COPY --from=build /app/build .
+
+RUN npm i
 
 EXPOSE 3000
 
