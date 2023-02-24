@@ -1,4 +1,4 @@
-<footer>Copyright &#169 2023;</footer>
+<footer>Copyright &#169 2023</footer>
 
 <style>
 	footer {

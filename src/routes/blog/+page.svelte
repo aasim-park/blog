@@ -1,6 +1,5 @@
 <script>
 	export let data;
-	console.log('data===>', data);
 	$: ({ posts } = data);
 </script>
 
@@ -12,7 +11,8 @@
 <section>
 	{#each posts as post}
 		<article>
-			<h2>{post.title}</h2>
+			<h1>{post.title}</h1>
+			<h2>{post.description}</h2>
 		</article>
 	{/each}
 </section>
