@@ -10,9 +10,11 @@
 
 <section>
 	{#each posts as post}
-		<article>
-			<h1>{post.title}</h1>
-			<h2>{post.description}</h2>
+		<article class="posts">
+			<a href="/blog/{post.title}">
+				<h1>{post.title}</h1>
+			</a>
+			<h2>{post.excerpt}</h2>
 		</article>
 	{/each}
 </section>
@@ -20,9 +22,13 @@
 <style>
 	section {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		gap: 30px;
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+	}
+	.posts {
+		padding: 20px;
 	}
 </style>
