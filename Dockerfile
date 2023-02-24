@@ -7,12 +7,13 @@ COPY . .
 
 RUN npm i
 
+
+RUN echo "The ARG variable value is $SECRET_DB_URL"
+
 RUN npm run build
 
 # server node
 FROM node:lts-slim As deploy
-
-ENV SECRET_DB_URL=${SECRET_DB_URL}
 
 WORKDIR /app
 
