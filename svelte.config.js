@@ -5,7 +5,7 @@ const config = {
 	kit: {
 		adapter: adapterNode(),
 		alias: {
-			$db: './src/lib/db',
+			$db: './src/lib/db'
 		}
 	}
 };

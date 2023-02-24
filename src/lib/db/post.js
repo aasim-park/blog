@@ -1,3 +1,3 @@
-import db from '$db/mongo'
+import db from '$db/mongo';
 
-export const post = db.collection('post')
+export const post = db.collection('post');
