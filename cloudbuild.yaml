@@ -9,7 +9,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
     args:
-      - echo '$$SECRET_DB_URL" > .env' &&
+      - echo '$$SECRET_DB_URL > .env' &&
       - docker build
       - '--no-cache'
       - '-t'
