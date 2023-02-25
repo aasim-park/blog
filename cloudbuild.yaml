@@ -1,15 +1,16 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: 
+    args:
       - '-c'
-      - 'echo "$$SECRET_DB_URL" > /workspace/secret.txt'
+      - 'echo "$$SECRET_DB_URL'
     secretEnv: ['SECRET_DB_URL']
     id: Checks
   - name: gcr.io/cloud-builders/docker
+    entrypoint: 'bash'
     args:
-      - echo '$$SECRET_DB_URL" > /workspace/.env' &&
-      - build
+      - echo '$$SECRET_DB_URL" > .env' &&
+      - docker build
       - '--no-cache'
       - '-t'
       - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
@@ -40,8 +41,8 @@ steps:
 
 availableSecrets:
   secretManager:
-  - versionName: projects/933790320727/secrets/SECRET_DB_URL/versions/1
-    env: 'SECRET_DB_URL'
+    - versionName: projects/933790320727/secrets/SECRET_DB_URL/versions/1
+      env: 'SECRET_DB_URL'
 
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
