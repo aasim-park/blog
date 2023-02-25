@@ -8,7 +8,11 @@ steps:
     id: Checks
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'echo $$SECRET_DB_URL > .env && cat .env && docker build --no-cache -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .']
+    args:
+      [
+        '-c',
+        'echo $$SECRET_DB_URL > .env && cat .env && docker build --no-cache -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .'
+      ]
     secretEnv: ['SECRET_DB_URL']
 
     id: Build
