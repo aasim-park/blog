@@ -3,7 +3,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'echo "$$SECRET_DB_URL'
+      - 'echo $$SECRET_DB_URL'
     secretEnv: ['SECRET_DB_URL']
     id: Checks
   - name: gcr.io/cloud-builders/docker
