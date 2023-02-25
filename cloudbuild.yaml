@@ -1,8 +1,13 @@
 steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: 
+      - '-c'
+      - 'echo this is secret $$SECRET_DB_URL'
+    secretEnv: ['SECRET_DB_URL']
   - name: gcr.io/cloud-builders/docker
     args:
       - build
-      - '--build-arg'
       - 'SECRET_DB_URL=$$SECRET_DB_URL'
       - '--no-cache'
       - '-t'
@@ -11,6 +16,7 @@ steps:
       - '-f'
       - Dockerfile
     id: Build
+    secretEnv: ['SECRET_DB_URL']
   - name: gcr.io/cloud-builders/docker
     args:
       - push
