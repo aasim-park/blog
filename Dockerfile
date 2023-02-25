@@ -7,9 +7,6 @@ COPY . .
 
 RUN npm i
 
-
-RUN echo "The ARG variable value is $SECRET_DB_URL"
-
 RUN npm run build
 
 # server node
