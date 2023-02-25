@@ -1,11 +1,52 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
     args:
-      [
-        'build',
-        '-t',
-        'asia-southeast1-docker.pkg.dev/cobalt-infinity-377910/blog/blog-image:tag1',
-        '.'
-      ]
+      - '-c'
+      - 'echo $$SECRET_DB_URL'
+    secretEnv: ['SECRET_DB_URL']
+    id: Checks
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: 'bash'
+    args: ['-c', 'echo $$SECRET_DB_URL > .env && cat .env && docker build --no-cache -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .']
+    secretEnv: ['SECRET_DB_URL']
+    id: Build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+    id: Push
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - run
+      - services
+      - update
+      - $_SERVICE_NAME
+      - '--platform=managed'
+      - '--image=$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+      - >-
+        --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID
+      - '--region=$_DEPLOY_REGION'
+      - '--quiet'
+    id: Deploy
+    entrypoint: gcloud
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/933790320727/secrets/SECRET_DB_URL/versions/1
+      env: 'SECRET_DB_URL'
+
 images:
-  - 'asia-southeast1-docker.pkg.dev/cobalt-infinity-377910/blog/blog-image:tag1'
+  - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+options:
+  substitutionOption: ALLOW_LOOSE
+substitutions:
+  _GCR_HOSTNAME: asia.gcr.io
+  _PLATFORM: managed
+  _SERVICE_NAME: blog
+  _DEPLOY_REGION: asia-southeast1
+  _TRIGGER_ID: 54ba5fb0-5450-4ec9-9450-54c7e95ccd3d
+tags:
+  - gcp-cloud-build-deploy-cloud-run
+  - gcp-cloud-build-deploy-cloud-run-managed
+  - blog

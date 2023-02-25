@@ -6,7 +6,7 @@
 .pnp.js
 
 # Sveltekit dependencies
-.svelte-kit
+/.svelte-kit
 
 # testing
 /coverage

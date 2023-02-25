@@ -17,8 +17,8 @@ WORKDIR /app
 COPY --from=build /app/package.json .
 COPY --from=build /app/build .
 
+RUN npm i
+
 EXPOSE 3000
 
 CMD ["node" , "index.js"]
-
-# CMD ["sh"]
