@@ -10,6 +10,7 @@ steps:
     entrypoint: 'bash'
     args: ['-c', 'echo $$SECRET_DB_URL > .env && cat .env && docker build --no-cache -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .']
     secretEnv: ['SECRET_DB_URL']
+
     id: Build
   - name: gcr.io/cloud-builders/docker
     args:
@@ -35,7 +36,6 @@ availableSecrets:
   secretManager:
     - versionName: projects/933790320727/secrets/SECRET_DB_URL/versions/1
       env: 'SECRET_DB_URL'
-
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
 options:
