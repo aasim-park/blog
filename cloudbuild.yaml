@@ -5,9 +5,11 @@ steps:
       - '-c'
       - 'echo this is secret $$SECRET_DB_URL'
     secretEnv: ['SECRET_DB_URL']
+    id: Checks
   - name: gcr.io/cloud-builders/docker
     args:
       - build
+      - '--build-arg'
       - 'SECRET_DB_URL=$$SECRET_DB_URL'
       - '--no-cache'
       - '-t'
