@@ -3,7 +3,7 @@ steps:
     entrypoint: 'bash'
     args: 
       - '-c'
-      - 'echo this is secret $$SECRET_DB_URL'
+      - 'export SECRET_DB_URL=$$SECRET_DB_URL'
     secretEnv: ['SECRET_DB_URL']
     id: Checks
   - name: gcr.io/cloud-builders/docker
