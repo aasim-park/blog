@@ -3,13 +3,12 @@ steps:
     entrypoint: 'bash'
     args: 
       - '-c'
-      - 'export SECRET_DB_URL=$$SECRET_DB_URL'
+      - 'echo "$$SECRET_DB_URL" > /workspace/secret.txt'
     secretEnv: ['SECRET_DB_URL']
     id: Checks
   - name: gcr.io/cloud-builders/docker
-    env:
-    - 'SECRET_DB_URL=$$SECRET_DB_URL'
     args:
+      - echo '$$SECRET_DB_URL" > /workspace/.env' &&
       - build
       - '--no-cache'
       - '-t'
@@ -17,8 +16,8 @@ steps:
       - .
       - '-f'
       - Dockerfile
-    id: Build
     secretEnv: ['SECRET_DB_URL']
+    id: Build
   - name: gcr.io/cloud-builders/docker
     args:
       - push
