@@ -1,12 +1,10 @@
 import { post } from '$db/post';
 
 export const load = async function () {
-	const data = await post.find({}, { projection: { _id: 0 } }).toArray();
-	// TODO: need to fix this _id error
-	// const data = await post.find().toArray();
-	// const result = data.map(())
+	const data = await post.find({}).toArray();
+	const parseData = await JSON.parse(JSON.stringify(data))
 	// console.log(data);
 	return {
-		posts: data
+			posts: parseData
 	};
 };

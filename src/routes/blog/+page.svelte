@@ -11,7 +11,7 @@
 <section class=" lg:flex lg:flex-row">
 	{#each posts as post}
 		<article class="p-10">
-			<a href="/blog/{post.title}">
+			<a href="/blog/{post._id}">
 				<h1>{post.title}</h1>
 			</a>
 			<h2>{post.excerpt}</h2>

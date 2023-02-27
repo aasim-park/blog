@@ -1,8 +1,10 @@
 import { post } from '$db/post';
 import { compile } from 'mdsvex';
+import { ObjectId } from "mongodb"
 
 export const load = async function ({ params }) {
-	const response = await post.find({ title: params.slug }, { projection: { _id: 0 } }).toArray();
+	const id = new ObjectId(params.slug)
+	const response = await post.find({"_id":id}).toArray();
 	const compileResponse = await compile(response[0].description);
 	return {
 		slug: compileResponse
