@@ -6,7 +6,7 @@ export const load = async function () {
 	// TODO: need to fix this _id error
 	// const data = await post.find().toArray();
 	// const result = data.map(())
-	console.log(data);
+	// console.log(data);
 	return {
 		posts: data
 	};
