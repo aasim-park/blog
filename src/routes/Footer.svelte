@@ -1,6 +1,6 @@
 <footer>Copyright &#169 2023</footer>
 
-<style>
+<style lang="postcss">
 	footer {
 		display: flex;
 		flex-direction: column;

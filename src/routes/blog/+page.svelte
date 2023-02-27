@@ -19,7 +19,7 @@
 	{/each}
 </section>
 
-<style>
+<style lang="postcss">
 	section {
 		display: flex;
 		flex-direction: row;
