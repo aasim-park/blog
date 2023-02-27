@@ -2,8 +2,6 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
-      - '--build-arg'
-      - 'SECRET_DB_URL=$$SECRET_DB_URL'
       - '--no-cache'
       - '-t'
       - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
@@ -36,6 +34,7 @@ availableSecrets:
   secretManager:
     - versionName: projects/933790320727/secrets/SECRET_DB_URL/versions/1
       env: 'SECRET_DB_URL'
+
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
 options:
