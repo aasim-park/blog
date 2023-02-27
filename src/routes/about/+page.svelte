@@ -8,44 +8,39 @@
 </svelte:head>
 
 <div class="text-column">
-	<h1>About</h1>
-	<div class="hello">Hello !</div>
-	<div class="name">I am Aasim Shaikh.</div>
-	<div>
-		I am a Software Developer living in Mumbai, India. Pursuing to be a cloud engineer. I have
-		experience in
-		<ul>
-			<li>Setup cloud VMs in <b>GCP, AWS, and digital ocean</b> cloud environments.</li>
-
-			<li>Make a <b>Dockerfile</b> and orchestrate it using <b>docker-compose</b>.</li>
-			<li>Hands-on exprience on <b>Kubernetes cluster</b> in GCP and AWS.</li>
-			<li><b>S3</b> for hosting static pages.</li>
-			<li><b>Cloud Run</b> for running container-based workload.</li>
-			<li><b>ECS</b> for Kubernetes-like experience on AWS.</li>
-			<li>
-				Database management in the cloud handled workload for DocumentDB (MongoDB on AWS), MYSQL
-				instances in AWS and DigitalOcean.
-			</li>
-			<li>
-				Setup pipeline in GCP to setup CI/CD using <b>code build</b> and Cloud Run.
-			</li>
-		</ul>
+	<div class="title">About</div>
+	<div class="text-justify p-3">
+		Hello! My name is <span class="underline-about">Aasim Shaikh </span>and I am a software
+		developer based in Mumbai. My area of expertise is cloud engineering, and I have experience
+		setting up cloud virtual machines (VMs) in <span class="underline-about"> GCP, AWS,</span> and
+		<span class="underline-about">Digital Ocean</span>
+		environments. I am also skilled in creating Docker files and orchestrating them using Docker Compose.
+		For container workloads, I have experience using AWS services such as
+		<span class="underline-about">EKS </span>and <span class="underline-about">ECS</span> , and in
+		GCP, I have deployed container workloads on GKE standard,
+		<span class="underline-about"> Cloud Run </span>, and
+		<span class="underline-about"> App Engine </span>
+		. In terms of CI/CD, I have used AWS Pipeline and
+		<span class="underline-about">Cloud Build</span>
+		in GCP. For database management, I have set up cloud-specific databases such as Amazon RDS and DocumentDB.
+		For basic setups, I create VMs for websites, set up networking with private and public routing options,
+		and create shell scripts to unify workloads. With respect to source code management (SCM), I have
+		experience using
+		<span class="underline-about">Git, GitHub, Bitbucket </span>, and
+		<span class="underline-about">GitLab</span>, as well as cloud-specific SCMs. Other cloud tools I
+		have used include S3, Secret Manager, Elastic Beanstalk, Cloud Functions, Lambda, and various
+		microservices and serverless tools.
 	</div>
-	<div class="name">Contact.</div>
+	<div class="title">Contact.</div>
 	<div>
 		<a href={resume}> Resume </a>
 		<a href="mailto: asimshaikh1993@gmail.com?subject = Contact"> Send email </a>
 	</div>
 </div>
 
-<style>
-	h1 {
-		font-size: 60px;
-	}
-	.hello {
-		font-size: 40px;
-	}
-	.name {
-		font-size: 30px;
+<style lang="postcss">
+	.title {
+		font-size: 50px;
+		text-align: center;
 	}
 </style>

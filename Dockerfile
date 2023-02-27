@@ -7,6 +7,7 @@ COPY . .
 
 RUN npm i
 
+ARG SECRET_DB_URL
 
 RUN echo "The ARG variable value is $SECRET_DB_URL"
 

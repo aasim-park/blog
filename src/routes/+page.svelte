@@ -21,7 +21,7 @@
 	</h1>
 </section>
 
-<style>
+<style lang="postcss">
 	section {
 		display: flex;
 		flex-direction: column;

@@ -1,4 +1,13 @@
 @import '@fontsource/fira-mono';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.underline-about {
+		@apply text-xl underline underline-offset-4 decoration-[#ff3e00];
+	}
+}
 
 :root {
 	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,

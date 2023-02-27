@@ -14,7 +14,7 @@
 	<Footer />
 </div>
 
-<style>
+<style lang="postcss">
 	.app {
 		display: flex;
 		flex-direction: column;

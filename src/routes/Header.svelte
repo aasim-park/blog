@@ -41,7 +41,7 @@
 	</div>
 </header>
 
-<style>
+<style lang="postcss">
 	header {
 		display: flex;
 		justify-content: space-between;
