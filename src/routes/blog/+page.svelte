@@ -8,9 +8,9 @@
 	<meta name="blogs post page" content="blogs" />
 </svelte:head>
 
-<section>
+<section class=" lg:flex lg:flex-row">
 	{#each posts as post}
-		<article class="posts">
+		<article class="p-10">
 			<a href="/blog/{post.title}">
 				<h1>{post.title}</h1>
 			</a>
@@ -20,15 +20,26 @@
 </section>
 
 <style lang="postcss">
-	section {
+	/* section {
 		display: flex;
 		flex-direction: row;
 		gap: 30px;
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
-	}
-	.posts {
+	} */
+	/* .posts {
 		padding: 20px;
-	}
+	} */
+
+	/* @media (min-width: 480px) {
+		section {
+			display: flex;
+			flex-direction: column;
+			gap: 30px;
+			justify-content: center;
+			align-items: center;
+			flex: 0.6;
+		}
+	} */
 </style>

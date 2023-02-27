@@ -9,7 +9,7 @@
 
 <div class="text-column">
 	<div class="title">About</div>
-	<div class="text-justify">
+	<div class="text-justify p-3">
 		Hello! My name is <span class="text-2xl underline underline-offset-4 decoration-[#ff3e00] "
 			>Aasim Shaikh
 		</span>and I am a software developer based in Mumbai. My area of expertise is cloud engineering,

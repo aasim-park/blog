@@ -7,6 +7,6 @@
 <!-- 
 <h1>{post[0].title}</h1>
 <h2>{post[0].excerpt}</h2> -->
-<article class="prose lg:prose-xl">
+<article class="prose lg:prose-2xl">
 	{@html post}
 </article>
