@@ -1,9 +1,15 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     args:
-      [
-        build --build-arg=$$SECRET_DB_URL --no-cache -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA -f Dockerfile .
-      ]
+      - build
+      - '--build-arg'
+      - 'SECRET_DB_URL=$$SECRET_DB_URL'
+      - '--no-cache'
+      - '-t'
+      - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+      - .
+      - '-f'
+      - Dockerfile
     secretEnv: ['SECRET_DB_URL']
     id: Build
   - name: gcr.io/cloud-builders/docker
