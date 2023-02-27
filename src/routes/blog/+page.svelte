@@ -19,27 +19,3 @@
 	{/each}
 </section>
 
-<style lang="postcss">
-	/* section {
-		display: flex;
-		flex-direction: row;
-		gap: 30px;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	} */
-	/* .posts {
-		padding: 20px;
-	} */
-
-	/* @media (min-width: 480px) {
-		section {
-			display: flex;
-			flex-direction: column;
-			gap: 30px;
-			justify-content: center;
-			align-items: center;
-			flex: 0.6;
-		}
-	} */
-</style>
