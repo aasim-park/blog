@@ -5,15 +5,15 @@
 	import logo from '$lib/images/svelte-logo.svg';
 	import user from '$lib/store/user.js';
 
-	$: isLogedIn = $user === null ? false : true;
-
+	// $: isLogedIn = $user === null ? false : true;
+	let loading = true;
 	onAuthStateChanged(auth, (users) => {
-		user.update((val) => (val = { ...users }));
+		loading = false;
+		if (users) user.update((val) => (val = { ...users }));
 	});
 	// $: userName = $user === null ? null : user.subscribe(v => v);
 	let userName;
 	user.subscribe((val) => {
-		console.log(val);
 		if (!val) return;
 		userName = val.displayName;
 	});
@@ -57,7 +57,19 @@
 
 	<div>
 		<div class="mr-2 flex flex-col lg:mr-6">
-			{#if isLogedIn}
+			{#if loading}
+				<div class="flex items-center justify-center">
+					<div
+						class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+						role="status"
+					>
+						<span
+							class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+							>Loading...</span
+						>
+					</div>
+				</div>
+			{:else if userName}
 				<input class="lg:pt-2" type="button" value="Logout!" on:click={logout} />
 				<p class="hidden md:block">
 					{userName}

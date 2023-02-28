@@ -10,7 +10,7 @@
 
 <section class=" lg:flex lg:flex-row">
 	{#each posts as post}
-		<article class="p-10">
+		<article class="p-6">
 			<a href="/blog/{post._id}">
 				<h1>{post.title}</h1>
 			</a>
