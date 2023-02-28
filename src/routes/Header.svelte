@@ -7,14 +7,27 @@
 
 	$: isLogedIn = $user === null ? false : true;
 
-	const logout = () => {
-		user.update((val) => (val = null));
-	};
-
+	// $: userName = $user === null ? null : user.subscribe(v => v);
 	let userName;
 	user.subscribe((val) => {
-		userName = val.email;
+		if (!val) return;
+		userName = val.displayName;
 	});
+
+	import { getAuth, signOut } from 'firebase/auth';
+	import { initializeApp } from 'firebase/app';
+	const app = initializeApp(firebaseConfig);
+	import firebaseConfig from '$lib/config/firebase.js';
+	const auth = getAuth(app);
+	const logout = async () => {
+		try {
+			await signOut(auth);
+			user.update((val) => (val = null));
+		} catch (error) {
+			currentError = error.message;
+		}
+
+	};
 </script>
 
 <header>

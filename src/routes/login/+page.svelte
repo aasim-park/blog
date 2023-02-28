@@ -2,7 +2,7 @@
 	// firebaseConfig
 	import firebaseConfig from '$lib/config/firebase.js';
 	import { initializeApp } from 'firebase/app';
-	import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+	import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 	const app = initializeApp(firebaseConfig);
 
 	// svelte normal
@@ -10,23 +10,25 @@
 	let email = '';
 	let password = '';
 	let currentError = null;
-	const auth = getAuth();
-	const login = () => {
-		console.log(email, password);
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				user.update((val) => (val = { ...userCredential.user }));
-			})
-			.catch((error) => {
-				currentError = error.message;
-				console.log(error);
+	const auth = getAuth(app);
+	onAuthStateChanged(auth, (users) => {
+		if (users) user.update((val) => (val = { ...users }));
+	});
+	const SignIn = async () => {
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+			onAuthStateChanged(auth, (users) => {
+				user.update((val) => (val = { ...users }));
 			});
+		} catch (error) {
+			currentError = error.message;
+		}
 	};
 </script>
 
-<h1>Login page</h1>
+<h1>Sign In</h1>
 
-<form on:submit|preventDefault={login}>
+<form on:submit|preventDefault={SignIn}>
 	<div>
 		<label for="email">Email</label>
 		<input type="email" id="email" bind:value={email} />
@@ -40,7 +42,7 @@
 			{currentError}
 		{/if}
 	</p>
-	<button type="submit">Submit</button>
+	<button type="submit">Sign In</button>
 </form>
 
 <div>
