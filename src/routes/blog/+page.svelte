@@ -18,4 +18,3 @@
 		</article>
 	{/each}
 </section>
-
