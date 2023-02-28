@@ -1,4 +1,12 @@
-import { PUBLIC_apiKey, PUBLIC_authDomain, PUBLIC_projectId,PUBLIC_storageBucket,PUBLIC_messagingSenderId,PUBLIC_appId,PUBLIC_measurementId } from '$env/static/public';
+import {
+	PUBLIC_apiKey,
+	PUBLIC_authDomain,
+	PUBLIC_projectId,
+	PUBLIC_storageBucket,
+	PUBLIC_messagingSenderId,
+	PUBLIC_appId,
+	PUBLIC_measurementId
+} from '$env/static/public';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 

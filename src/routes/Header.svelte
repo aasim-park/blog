@@ -1,17 +1,19 @@
 <script>
-	import { signOut,onAuthStateChanged } from 'firebase/auth';
+	import { signOut, onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
 	import user from '$lib/store/user.js';
 
 	$: isLogedIn = $user === null ? false : true;
 
+	onAuthStateChanged(auth, (users) => {
+		user.update((val) => (val = { ...users }));
+	});
 	// $: userName = $user === null ? null : user.subscribe(v => v);
 	let userName;
 	user.subscribe((val) => {
-		console.log(val)
+		console.log(val);
 		if (!val) return;
 		userName = val.displayName;
 	});
@@ -24,9 +26,6 @@
 			currentError = error.message;
 		}
 	};
-	onAuthStateChanged(auth, (users) => {
-		if (users) user.update((val) => (val = { ...users }));
-	});
 </script>
 
 <header>
@@ -57,16 +56,15 @@
 	</nav>
 
 	<div>
-		<div class="flex p-2 gap-2">
+		<div class="mr-2 flex flex-col lg:mr-6">
 			{#if isLogedIn}
-				<input type="button" value="Logout!" on:click={logout} />
-				{userName}
+				<input class="lg:pt-2" type="button" value="Logout!" on:click={logout} />
+				<p class="hidden md:block">
+					{userName}
+				</p>
 			{:else}
 				<a href="/login">Sign in</a>
 			{/if}
-			<a href="https://github.com/aasim-park?tab=repositories">
-				<img class="w-6" src={github} alt="GitHub" />
-			</a>
 		</div>
 	</div>
 </header>
