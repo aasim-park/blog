@@ -1,14 +1,12 @@
 <script>
 	// firebaseConfig
-	import firebaseConfig from '$lib/config/firebase.js';
-	import { initializeApp } from 'firebase/app';
-	import {
-		getAuth,
+	import { auth } from '$lib/config/firebase.js';
+	import { 
 		createUserWithEmailAndPassword,
 		updateProfile,
 		onAuthStateChanged
 	} from 'firebase/auth';
-	const app = initializeApp(firebaseConfig);
+	import { goto } from '$app/navigation';
 
 	// svelte normal
 	import user from '$lib/store/user.js';
@@ -16,11 +14,9 @@
 	let email = '';
 	let password = '';
 	let currentError = null;
-	const auth = getAuth(app);
-
-	onAuthStateChanged(auth, (users) => {
-		if (users) user.update((val) => (val = { ...users }));
-	});
+	// onAuthStateChanged(auth, (users) => {
+	// 	if (users) user.update((val) => (val = { ...users }));
+	// });
 	const singUp = async () => {
 		try {
 			await createUserWithEmailAndPassword(auth, email, password);
@@ -28,6 +24,7 @@
 			onAuthStateChanged(auth, (users) => {
 				user.update((val) => (val = { ...users }));
 			});
+			goto('/')
 		} catch (error) {
 			currentError = error.message;
 		}

@@ -1,8 +1,9 @@
 <script>
+	import { signOut,onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
-
 	import user from '$lib/store/user.js';
 
 	$: isLogedIn = $user === null ? false : true;
@@ -10,15 +11,11 @@
 	// $: userName = $user === null ? null : user.subscribe(v => v);
 	let userName;
 	user.subscribe((val) => {
+		console.log(val)
 		if (!val) return;
 		userName = val.displayName;
 	});
 	let currentError;
-	import { getAuth, signOut } from 'firebase/auth';
-	import { initializeApp } from 'firebase/app';
-	const app = initializeApp(firebaseConfig);
-	import firebaseConfig from '$lib/config/firebase.js';
-	const auth = getAuth(app);
 	const logout = async () => {
 		try {
 			await signOut(auth);
@@ -27,6 +24,9 @@
 			currentError = error.message;
 		}
 	};
+	onAuthStateChanged(auth, (users) => {
+		if (users) user.update((val) => (val = { ...users }));
+	});
 </script>
 
 <header>

@@ -1,25 +1,24 @@
 <script>
 	// firebaseConfig
-	import firebaseConfig from '$lib/config/firebase.js';
-	import { initializeApp } from 'firebase/app';
-	import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-	const app = initializeApp(firebaseConfig);
+	import {auth} from '$lib/config/firebase.js'; 
+	import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+	import { goto } from '$app/navigation';
 
 	// svelte normal
 	import user from '$lib/store/user.js';
 	let email = '';
 	let password = '';
 	let currentError = null;
-	const auth = getAuth(app);
-	onAuthStateChanged(auth, (users) => {
-		if (users) user.update((val) => (val = { ...users }));
-	});
+	// onAuthStateChanged(auth, (users) => {
+	// 	if (users) user.update((val) => (val = { ...users }));
+	// });
 	const SignIn = async () => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			onAuthStateChanged(auth, (users) => {
 				user.update((val) => (val = { ...users }));
 			});
+			goto('/')
 		} catch (error) {
 			currentError = error.message;
 		}
