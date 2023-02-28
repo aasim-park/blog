@@ -3,13 +3,18 @@
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 
-	import user from '../../user';
+	import user from '$lib/store/user.js';
 
 	$: isLogedIn = $user === null ? false : true;
 
 	const logout = () => {
 		user.update((val) => (val = null));
 	};
+
+	let userName;
+	user.subscribe((val) => {
+		userName = val.email;
+	});
 </script>
 
 <header>
@@ -43,9 +48,10 @@
 		<div class="flex p-2 gap-2">
 			{#if isLogedIn}
 				<input type="button" value="Logout!" on:click={logout} />
+				{userName}
+			{:else}
+				<a href="/login">Sign in</a>
 			{/if}
-
-			<a href="/login">Login</a>
 			<a href="https://github.com/aasim-park?tab=repositories">
 				<img class="w-6" src={github} alt="GitHub" />
 			</a>
