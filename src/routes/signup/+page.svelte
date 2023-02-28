@@ -19,14 +19,14 @@
 	const auth = getAuth(app);
 
 	onAuthStateChanged(auth, (users) => {
-		if (users) user.update((val) => (val = { ...users }));
+		if (users) user.update((val) => val = {...users} );
 	});
 	const singUp = async () => {
 		try {
 			await createUserWithEmailAndPassword(auth, email, password);
 			await updateProfile(auth.currentUser, { displayName: name });
 			onAuthStateChanged(auth, (users) => {
-				user.update((val) => (val = { ...users }));
+				user.update((val) => val = { ...users });
 			});
 		} catch (error) {
 			currentError = error.message;

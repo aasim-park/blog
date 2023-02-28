@@ -13,7 +13,7 @@
 		if (!val) return;
 		userName = val.displayName;
 	});
-
+	let currentError
 	import { getAuth, signOut } from 'firebase/auth';
 	import { initializeApp } from 'firebase/app';
 	const app = initializeApp(firebaseConfig);
@@ -26,7 +26,6 @@
 		} catch (error) {
 			currentError = error.message;
 		}
-
 	};
 </script>
 
