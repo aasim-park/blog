@@ -92,10 +92,10 @@
 
 	@media (min-width: 480px) {
 		header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 	}
 
 	.corner {
