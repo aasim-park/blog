@@ -2,7 +2,13 @@
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				colorTheme_1: '#ff3e00',
+				colorTheme_1_light: '#ff794d',
+				colorTheme_2: '#4075a6'
+			}
+		}
 	},
 	plugins: [require('@tailwindcss/typography')]
 };

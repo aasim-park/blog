@@ -5,7 +5,7 @@
 
 @layer components {
 	.underline-about {
-		@apply text-xl underline underline-offset-4 decoration-[#ff3e00];
+		@apply text-xl underline underline-offset-4 decoration-colorTheme_1;
 	}
 }
 
