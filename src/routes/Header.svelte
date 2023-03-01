@@ -75,7 +75,7 @@
 		{:else}
 			<button>
 				<a
-					class="lg:m-10 p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
+					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
 					href="/login">Sign in</a
 				>
 			</button>
@@ -88,6 +88,14 @@
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+	}
+
+	@media (min-width: 480px) {
+		header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 	}
 
 	.corner {
