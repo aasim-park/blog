@@ -51,9 +51,11 @@
 		{/if}
 	</p>
 	<button
-		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-		type="submit">Sign In</button
+		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+		type="submit"
 	>
+		Sign In
+	</button>
 </form>
 
 <div class="text-center mt-9">

@@ -54,37 +54,39 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-
-	<div>
-		<div class="mr-2 flex flex-col lg:mr-6">
-			{#if loading}
-				<div class="flex items-center justify-center">
-					<div
-						class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-						role="status"
+	<div class="p-2 flex flex-col">
+		{#if loading}
+			<div class="flex items-center justify-center">
+				<div
+					class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+					role="status"
+				>
+					<span
+						class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+						>Loading...</span
 					>
-						<span
-							class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-							>Loading...</span
-						>
-					</div>
 				</div>
-			{:else if userName}
-				<input class="lg:pt-2" type="button" value="Logout!" on:click={logout} />
-				<p class="hidden md:block">
-					{userName}
-				</p>
-			{:else}
-				<a href="/login">Sign in</a>
-			{/if}
-		</div>
+			</div>
+		{:else if userName}
+			<button class="lg:pt-2" type="button" value="Logout!" on:click={logout}>logout </button>
+			<p class="hidden md:block">
+				{userName}
+			</p>
+		{:else}
+			<button>
+				<a
+					class="lg:m-10 p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
+					href="/login">Sign in</a
+				>
+			</button>
+		{/if}
 	</div>
 </header>
 
 <style lang="postcss">
 	header {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 	}
 
