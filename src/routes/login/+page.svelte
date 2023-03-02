@@ -16,7 +16,7 @@
 			onAuthStateChanged(auth, (users) => {
 				user.update((val) => users.displayName);
 			});
-			goto('/');
+			goto('/blog');
 		} catch (error) {
 			currentError = error.message;
 		}

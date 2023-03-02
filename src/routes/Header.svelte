@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import user from '$lib/store/user.js';
+	import { goto } from '$app/navigation';
 	// consts
 	let currentError;
 	let userName;
@@ -21,6 +22,7 @@
 		try {
 			await signOut(auth);
 			user.set(null);
+			goto('/');
 		} catch (error) {
 			currentError = error.message;
 		}
