@@ -1,11 +1,17 @@
 <script>
-	
 	let title = '';
 	let excerpt = '';
 	let description = '';
 	let currentError = '';
+
+	const posts = window.localStorage.getItem('post');
+	console.log('localStorage===>', posts);
+	if (posts !== null) {
+		description = posts;
+	}
+
 	const savePost = async () => {
-		// console.log(title, excerpt, description);
+		description = 'hiiii new description';
 	};
 </script>
 
@@ -34,7 +40,7 @@
 		<label for="description" />
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-			type="text"
+			type="textarea"
 			id="description"
 			placeholder="Description"
 			bind:value={description}

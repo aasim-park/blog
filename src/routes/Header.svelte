@@ -17,7 +17,7 @@
 			}
 		});
 	}
-
+	// console.log("USER===>",user)
 	const logout = async () => {
 		try {
 			await signOut(auth);
