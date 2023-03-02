@@ -4,7 +4,6 @@
 	const id = data.id;
 	const title = data.title;
 	const excerpt = data.excerpt;
-	console.log(id, title, excerpt);
 	import { browser } from '$app/environment';
 
 	if (browser) {

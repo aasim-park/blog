@@ -13,7 +13,6 @@
 		excerpt = excerpt1;
 		title = title1;
 	}
-
 	const savePost = async () => {};
 </script>
 
@@ -40,9 +39,10 @@
 	</div>
 	<div>
 		<label for="description" />
-		<input
+		<textarea
+			rows="10"
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-			type="textarea"
+			type="text"
 			id="description"
 			placeholder="Description"
 			bind:value={description}
