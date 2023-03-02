@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	const post = data.slug.code;
-	// console.log(data.description)
 </script>
 
 <!-- 

@@ -9,11 +9,12 @@
 	let email = '';
 	let password = '';
 	let currentError = null;
+
 	const SignIn = async () => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			onAuthStateChanged(auth, (users) => {
-				user.update((val) => (val = { ...users }));
+				user.update((val) => users.displayName);
 			});
 			goto('/');
 		} catch (error) {

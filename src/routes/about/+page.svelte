@@ -31,10 +31,24 @@
 		have used include S3, Secret Manager, Elastic Beanstalk, Cloud Functions, Lambda, and various
 		microservices and serverless tools.
 	</div>
-	<div class="title">Contact.</div>
-	<div>
-		<a href={resume}> Resume </a>
-		<a href="mailto: asimshaikh1993@gmail.com?subject = Contact"> Send email </a>
+	<div class="title">Contact</div>
+	<div class="flex m-2 justify-around">
+		<button type="submit">
+			<a
+				class=" bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+				href={resume}
+			>
+				Resume
+			</a>
+		</button>
+		<button type="submit">
+			<a
+				class=" bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+				href="mailto: asimshaikh1993@gmail.com?subject = Contact"
+			>
+				Send email
+			</a>
+		</button>
 	</div>
 </div>
 
