@@ -1,25 +1,26 @@
 <script>
 	export let data;
-	const post = data.slug.code;
+	const description = data.description.code;
+	const id = data.id;
+	const title = data.title;
+	const excerpt = data.excerpt;
+	console.log(id, title, excerpt);
 	import { browser } from '$app/environment';
 
 	if (browser) {
 		const browserStorage = () => {
-			window.localStorage.setItem('post', post);
+			window.localStorage.setItem('description', description);
+			window.localStorage.setItem('title', title);
+			window.localStorage.setItem('excerpt', excerpt);
+			window.localStorage.setItem('id', id);
 		};
-		browserStorage()
+		browserStorage();
 	}
 </script>
 
-<!-- 
-<h1>{post[0].title}</h1>
-<h2>{post[0].excerpt}</h2> -->
-<!-- {goto('/editblog') post=post} -->
 <div>
-	<a href="/editblog">
-		edit Blog
-	</a>
+	<a href="/editblog"> edit Blog </a>
 </div>
 <article class="prose break-words md:m-auto">
-	{@html post}
+	{@html description}
 </article>

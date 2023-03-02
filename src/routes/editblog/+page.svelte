@@ -4,15 +4,17 @@
 	let description = '';
 	let currentError = '';
 
-	const posts = window.localStorage.getItem('post');
-	console.log('localStorage===>', posts);
-	if (posts !== null) {
-		description = posts;
+	let description1 = window.localStorage.getItem('description');
+	let excerpt1 = window.localStorage.getItem('excerpt');
+	let title1 = window.localStorage.getItem('title');
+	let id = window.localStorage.getItem('id');
+	if (id !== null) {
+		description = description1;
+		excerpt = excerpt1;
+		title = title1;
 	}
 
-	const savePost = async () => {
-		description = 'hiiii new description';
-	};
+	const savePost = async () => {};
 </script>
 
 <form class="mt-10 flex flex-col items-center" on:submit|preventDefault={savePost}>

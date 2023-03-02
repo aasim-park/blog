@@ -4,6 +4,9 @@
 	export let data;
 	$: ({ posts } = data);
 	$: isLogedIn = $user === null ? false : true;
+	const clearLocalStorage = () => {
+		window.localStorage.clear();
+	};
 </script>
 
 <svelte:head>
@@ -12,13 +15,13 @@
 </svelte:head>
 
 <section class=" lg:flex lg:flex-row">
-	<div class="">
+	<button on:click={clearLocalStorage} class="">
 		<a href="/editblog">
 			{#if isLogedIn}
 				<img src={plusIcon} alt="Home" />
 			{/if}
 		</a>
-	</div>
+	</button>
 
 	{#each posts as post}
 		<article class="p-6">
