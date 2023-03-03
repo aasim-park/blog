@@ -30,6 +30,7 @@
 	"dependencies": {
 		"firebase": "^9.17.1",
 		"mdsvex": "^0.10.6",
-		"mongodb": "^5.0.1"
+		"mongodb": "^5.0.1",
+		"zod": "^3.20.6"
 	}
 }

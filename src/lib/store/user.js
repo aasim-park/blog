@@ -1,11 +1,10 @@
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
-const user = writable(null);
+// import { browser } from '$app/environment';
 
-user.subscribe((value) => {
-	if (browser) {
-		window.localStorage.setItem('store', value);
-	}
-});
+let user = writable(null);
+
+// if (browser) {
+// 	user.subscribe((val) => localStorage.setItem('store', JSON.stringify(val)));
+// }
 
 export default user;

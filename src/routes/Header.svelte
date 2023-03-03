@@ -12,12 +12,10 @@
 	$: {
 		onAuthStateChanged(auth, (users) => {
 			if (users) {
-				const displayName = users.displayName;
-				userName = user.update((val) => displayName);
+				user.update((val) => users.displayName);
 			}
 		});
 	}
-	// console.log("USER===>",user)
 	const logout = async () => {
 		try {
 			await signOut(auth);
@@ -32,8 +30,8 @@
 <header>
 	<div class="corner">
 		<a href="/">
-			<img src={logo} alt="Home" />
-			<!-- {$user} -->
+			<!-- <img src={logo} alt="Home" /> -->
+			{$user}
 		</a>
 	</div>
 
