@@ -7,15 +7,8 @@
 	import { goto } from '$app/navigation';
 	// consts
 	let currentError;
-	let userName;
 	$: isLogedIn = $user === null ? false : true;
-	$: {
-		onAuthStateChanged(auth, (users) => {
-			if (users) {
-				user.update((val) => users.displayName);
-			}
-		});
-	}
+
 	const logout = async () => {
 		try {
 			await signOut(auth);
@@ -30,8 +23,8 @@
 <header>
 	<div class="corner">
 		<a href="/">
-			<!-- <img src={logo} alt="Home" /> -->
-			{$user}
+			<img src={logo} alt="Home" />
+			<!-- {$user} -->
 		</a>
 	</div>
 
@@ -56,13 +49,15 @@
 	</nav>
 	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
 		{#if isLogedIn}
-			<button
-				class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
-				type="button"
-				value="Logout!"
-				on:click={logout}
-				>logout
-			</button>
+			<form class="mt-10 flex flex-col items-center" action="?/logout" method="POST">
+				<button
+					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
+					type="button"
+					value="Logout!"
+					on:click={logout}
+					>logout
+				</button>
+			</form>
 			<p class="hidden md:text-center md:inline">
 				{$user}
 			</p>

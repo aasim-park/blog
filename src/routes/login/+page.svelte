@@ -1,7 +1,12 @@
 <script>
+	import user from '$lib/store/user.js';
 	export let form;
 	let email = '';
 	let password = '';
+	$: console.log(form?.displayName);
+	if (form?.displayName) {
+		user.update((val) => form.displayName);
+	}
 </script>
 
 <p class="text-center text-4xl mt-10">Sign In</p>

@@ -1,7 +1,15 @@
 import { loginSchema } from '$lib/validation/loginSchema.js';
 import { auth } from '$lib/config/firebase.js';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import user from '$lib/store/user.js';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+
+const authChangePromise = new Promise((res) => {
+	onAuthStateChanged(auth, (users) => {
+		res( {
+			displayName: users.displayName
+		});
+	});
+})
 
 export const actions = {
 	login: async ({ request }) => {
@@ -10,9 +18,7 @@ export const actions = {
 			loginSchema.parse(formData);
 			const { email, password } = formData;
 			await signInWithEmailAndPassword(auth, email, password);
-			onAuthStateChanged(auth, (users) => {
-				user.update((val) => users.displayName);
-			});
+			return await authChangePromise;
 		} catch (err) {
 			if (err.issues) {
 				const { fieldErrors: errors } = err.flatten();
