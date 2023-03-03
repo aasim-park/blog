@@ -2,14 +2,17 @@ import { loginSchema } from '$lib/validation/loginSchema.js';
 import { auth } from '$lib/config/firebase.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
+import { redirect } from '@sveltejs/kit'
 
-const authChangePromise = new Promise((res) => {
-	onAuthStateChanged(auth, (users) => {
-		res( {
-			displayName: users.displayName
+const authChangePromise = () =>
+	new Promise((res, rej) => {
+		onAuthStateChanged(auth, (users) => {
+			if (!users) rej('User Not Found');
+			res({
+				displayName: users.displayName
+			});
 		});
 	});
-})
 
 export const actions = {
 	login: async ({ request }) => {
@@ -18,7 +21,7 @@ export const actions = {
 			loginSchema.parse(formData);
 			const { email, password } = formData;
 			await signInWithEmailAndPassword(auth, email, password);
-			return await authChangePromise;
+			return await authChangePromise() ;
 		} catch (err) {
 			if (err.issues) {
 				const { fieldErrors: errors } = err.flatten();

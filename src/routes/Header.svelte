@@ -1,23 +1,10 @@
 <script>
-	import { signOut, onAuthStateChanged } from 'firebase/auth';
-	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import user from '$lib/store/user.js';
-	import { goto } from '$app/navigation';
 	// consts
 	let currentError;
 	$: isLogedIn = $user === null ? false : true;
-
-	const logout = async () => {
-		try {
-			await signOut(auth);
-			user.set(null);
-			goto('/');
-		} catch (error) {
-			currentError = error.message;
-		}
-	};
 </script>
 
 <header>
@@ -49,12 +36,11 @@
 	</nav>
 	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
 		{#if isLogedIn}
-			<form class="mt-10 flex flex-col items-center" action="?/logout" method="POST">
+			<form action="/logout" method="POST">
 				<button
 					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
-					type="button"
+					type="submit"
 					value="Logout!"
-					on:click={logout}
 					>logout
 				</button>
 			</form>

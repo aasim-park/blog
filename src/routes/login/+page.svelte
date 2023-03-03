@@ -3,7 +3,6 @@
 	export let form;
 	let email = '';
 	let password = '';
-	$: console.log(form?.displayName);
 	if (form?.displayName) {
 		user.update((val) => form.displayName);
 	}
