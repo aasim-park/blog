@@ -1,10 +1,15 @@
 <script>
 	import user from '$lib/store/user.js';
+	import { applyAction, enhance } from '$app/forms';
 	export let form;
+	import { invalidateAll, goto } from '$app/navigation';
+	// console.log('form===>', form?.displayName);
 	let email = '';
 	let password = '';
 	if (form?.displayName) {
+		console.log('before updating store', $user);
 		user.update((val) => form.displayName);
+		console.log('updated store', $user);
 	}
 </script>
 
@@ -15,7 +20,7 @@
 {/if}
 
 <form class="mt-10 flex flex-col items-center" action="?/login" method="POST">
-	<div class="mb-4">
+	<div class="m-2">
 		<label for="email" />
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import user from '$lib/store/user.js';
+	import { enhance, applyAction } from '$app/forms';
 	// consts
 	let currentError;
 	$: isLogedIn = $user === null ? false : true;
@@ -11,7 +12,7 @@
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
-			<!-- {$user} -->
+			{$user}
 		</a>
 	</div>
 
@@ -36,7 +37,25 @@
 	</nav>
 	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
 		{#if isLogedIn}
-			<form action="/logout" method="POST">
+			<form
+				action="?/logout"
+				use:enhance={({ form, data, action, cancel }) => {
+					// `form` is the `<form>` element
+					// `data` is its `FormData` object
+					// `action` is the URL to which the form is posted
+					// `cancel()` will prevent the submission
+
+					return async ({ result }) => {
+						// `result` is an `ActionResult` object
+						if (result.type === 'success') {
+							user.set(null);
+							await applyAction(result);
+							console.log($user)
+						}
+					};
+				}}
+				method="POST"
+			>
 				<button
 					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
 					type="submit"

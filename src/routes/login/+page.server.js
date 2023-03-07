@@ -2,7 +2,7 @@ import { loginSchema } from '$lib/validation/loginSchema.js';
 import { auth } from '$lib/config/firebase.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
-import { redirect } from '@sveltejs/kit'
+import { signOut } from 'firebase/auth';
 
 const authChangePromise = () =>
 	new Promise((res, rej) => {
@@ -21,7 +21,7 @@ export const actions = {
 			loginSchema.parse(formData);
 			const { email, password } = formData;
 			await signInWithEmailAndPassword(auth, email, password);
-			return await authChangePromise() ;
+			return await authChangePromise();
 		} catch (err) {
 			if (err.issues) {
 				const { fieldErrors: errors } = err.flatten();
@@ -31,6 +31,15 @@ export const actions = {
 					err: err.code
 				};
 			}
+		}
+	},
+	logout: async () => {
+		console.log('REACED TO LOGOUT');
+		try {
+			await signOut(auth);
+			return { sucess: true };
+		} catch (err) {
+			console.log(err);
 		}
 	}
 };
