@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
@@ -10,6 +11,7 @@
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
+			<!-- {$page?.data?.user?.displayName} -->
 			<!-- {$page?.data?.user?.displayName} -->
 		</a>
 	</div>
@@ -54,6 +56,27 @@
 			</form>
 			<p class="hidden md:text-center md:inline">
 				{user}
+	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
+		{#if user}
+			<form
+				action="/logout"
+				use:enhance={() => {
+					return async ({ result }) => {
+						invalidateAll();
+						await applyAction(result);
+					};
+				}}
+				method="POST"
+			>
+				<button
+					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
+					type="submit"
+					value="Logout!"
+					>logout
+				</button>
+			</form>
+			<p class="hidden md:text-center md:inline">
+				{user}
 			</p>
 		{:else}
 			<button>
@@ -71,12 +94,15 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
+		justify-content: space-between;
+		align-items: flex-start;
 	}
 
 	@media (min-width: 480px) {
 		header {
 			display: flex;
 			justify-content: space-between;
+			align-items: flex-start;
 			align-items: flex-start;
 		}
 	}
