@@ -43,3 +43,11 @@ export const singupSchema = z.object({
 		.min(6, { message: 'Password must be at least 6 characters' })
 		.trim()
 });
+
+export const restSchema = z.object({
+	email: z
+		.string({ required_error: 'Email is required' })
+		.trim()
+		.max(64, { message: 'Name must be less than 64 characters' })
+		.email({ message: 'Email must be a valid email address' }),
+});

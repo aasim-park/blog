@@ -39,6 +39,9 @@
 	{#if form?.errors?.password}
 		<span class="py-2 px-1 text-red-400">{form?.errors?.password[0]}</span>
 	{/if}
+	<div class="m-2">
+		<a href="/resetpassword">Forgot password</a>
+	</div>
 	<button
 		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 		type="submit"
