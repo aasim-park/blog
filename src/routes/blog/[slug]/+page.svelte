@@ -21,10 +21,6 @@
 <div>
 	<a href="/editblog"> edit Blog </a>
 </div>
-<div>
-	<a href="/editblog"> edit Blog </a>
-</div>
 <article class="prose break-words md:m-auto">
-	{@html description}
 	{@html description}
 </article>

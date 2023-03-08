@@ -1,16 +1,8 @@
 <script>
 	import plusIcon from '$lib/images/plus_icon.svg';
 	import { page } from '$app/stores';
-	// console.log('blogPage', $page?.data?.user?.displayName);
-	import plusIcon from '$lib/images/plus_icon.svg';
-	import { page } from '$app/stores';
-	// console.log('blogPage', $page?.data?.user?.displayName);
 	export let data;
 	$: ({ posts } = data);
-	$: user = $page?.data?.user?.displayName;
-	const clearLocalStorage = () => {
-		window.localStorage.clear();
-	};
 	$: user = $page?.data?.user?.displayName;
 	const clearLocalStorage = () => {
 		window.localStorage.clear();

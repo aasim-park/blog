@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
@@ -11,7 +10,6 @@
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
-			<!-- {$page?.data?.user?.displayName} -->
 			<!-- {$page?.data?.user?.displayName} -->
 		</a>
 	</div>
@@ -35,27 +33,6 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
-		{#if user}
-			<form
-				action="/logout"
-				use:enhance={() => {
-					return async ({ result }) => {
-						invalidateAll();
-						await applyAction(result);
-					};
-				}}
-				method="POST"
-			>
-				<button
-					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
-					type="submit"
-					value="Logout!"
-					>logout
-				</button>
-			</form>
-			<p class="hidden md:text-center md:inline">
-				{user}
 	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
 		{#if user}
 			<form

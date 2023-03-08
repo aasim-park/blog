@@ -1,6 +1,4 @@
 <script>
-	import { page } from '$app/stores';
-	// console.log('LayoutPage', $page?.data?.user?.displayName);
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import './styles.css';

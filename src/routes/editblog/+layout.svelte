@@ -4,14 +4,14 @@
 
 <div class="app">
 	{#if $page?.data?.user?.displayName}
-	<main>
-		<slot />
-	</main>
+		<main>
+			<slot />
+		</main>
 	{:else}
-	<h1>Please 
-		<a href="/login">
-			login
-		</a>
-		 to edit</h1>
+		<h1>
+			Please
+			<a href="/login"> login </a>
+			to edit
+		</h1>
 	{/if}
 </div>
