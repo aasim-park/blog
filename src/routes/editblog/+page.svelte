@@ -3,20 +3,21 @@
 	let excerpt = '';
 	let description = '';
 	let currentError = '';
-
-	let description1 = window.localStorage.getItem('description');
-	let excerpt1 = window.localStorage.getItem('excerpt');
-	let title1 = window.localStorage.getItem('title');
-	let id = window.localStorage.getItem('id');
-	if (id !== null) {
-		description = description1;
-		excerpt = excerpt1;
-		title = title1;
+	import { browser } from '$app/environment'
+	if (browser) {
+		let description1 = window.localStorage.getItem('description');
+		let excerpt1 = window.localStorage.getItem('excerpt');
+		let title1 = window.localStorage.getItem('title');
+		let id = window.localStorage.getItem('id');
+		if (id !== null) {
+			description = description1;
+			excerpt = excerpt1;
+			title = title1;
+		}
 	}
-	const savePost = async () => {};
 </script>
 
-<form class="mt-10 flex flex-col items-center" on:submit|preventDefault={savePost}>
+<form class="mt-10 flex flex-col items-center" method="POST">
 	<div class="mb-4">
 		<label for="title" />
 		<input
@@ -25,6 +26,7 @@
 			id="title"
 			placeholder="Title"
 			bind:value={title}
+			name="title"
 		/>
 	</div>
 	<div class="mb-4">
@@ -35,6 +37,7 @@
 			id="except"
 			placeholder="Except"
 			bind:value={excerpt}
+			name="excerpt"
 		/>
 	</div>
 	<div>
@@ -46,6 +49,7 @@
 			id="description"
 			placeholder="Description"
 			bind:value={description}
+			name="description"
 		/>
 	</div>
 	<p>

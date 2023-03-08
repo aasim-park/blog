@@ -1,7 +1,10 @@
 <script>
 	import plusIcon from '$lib/images/plus_icon.svg';
+	import { page } from '$app/stores';
+	console.log('blogPage', $page?.data?.user?.displayName);
 	export let data;
 	$: ({ posts } = data);
+	$: user = $page?.data?.user?.displayName;
 	const clearLocalStorage = () => {
 		window.localStorage.clear();
 	};
@@ -13,11 +16,13 @@
 </svelte:head>
 
 <section class=" lg:flex lg:flex-row">
-	<button on:click={clearLocalStorage} class="">
-		<a href="/editblog">
-		</a>
-	</button>
-
+	{#if user}
+		<button on:click={clearLocalStorage} class="">
+			<a href="/editblog">
+				<img src={plusIcon} alt="Home" />
+			</a>
+		</button>
+	{/if}
 	{#each posts as post}
 		<article class="p-6">
 			<a href="/blog/{post._id}">
