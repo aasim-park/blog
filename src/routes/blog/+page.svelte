@@ -2,8 +2,15 @@
 	import plusIcon from '$lib/images/plus_icon.svg';
 	import { page } from '$app/stores';
 	// console.log('blogPage', $page?.data?.user?.displayName);
+	import plusIcon from '$lib/images/plus_icon.svg';
+	import { page } from '$app/stores';
+	// console.log('blogPage', $page?.data?.user?.displayName);
 	export let data;
 	$: ({ posts } = data);
+	$: user = $page?.data?.user?.displayName;
+	const clearLocalStorage = () => {
+		window.localStorage.clear();
+	};
 	$: user = $page?.data?.user?.displayName;
 	const clearLocalStorage = () => {
 		window.localStorage.clear();
@@ -19,7 +26,7 @@
 	{#if user}
 		<button on:click={clearLocalStorage} class="">
 			<a href="/editblog">
-				<img src={plusIcon} alt="Home" />
+				<img src={plusIcon} alt="plusicon" />
 			</a>
 		</button>
 	{/if}
