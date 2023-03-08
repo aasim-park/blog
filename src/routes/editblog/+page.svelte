@@ -23,7 +23,7 @@
 	class="mt-10 flex flex-col items-center"
 	method="POST"
 	use:enhance={({ form, data, action, cancel }) => {
-		console.log();
+		// console.log();
 		return async ({ result, update }) => {};
 	}}
 >

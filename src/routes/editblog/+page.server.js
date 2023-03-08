@@ -8,11 +8,12 @@ export const actions = {
 		// console.log(id)
 		const objectid = new ObjectId(id);
 		try {
-			const data = await post
-				.update({ objectid }, { $set: { title, excerpt, description } })
-				.toArray();
-			const parseData = await JSON.parse(JSON.stringify(data));
-			console.log(parseData);
+			const data = await post.updateOne(
+				{ _id: objectid },
+				{ $set: { title, excerpt, description } }
+			);
+			await JSON.parse(JSON.stringify(data));
+			return {success:true}
 		} catch (err) {
 			console.log(err);
 		}
