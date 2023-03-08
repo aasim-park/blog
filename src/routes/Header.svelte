@@ -1,4 +1,6 @@
 <script>
+	import { signOut, onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
 	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
