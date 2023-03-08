@@ -5,7 +5,6 @@
 	import { goto } from '$app/navigation';
 
 	// svelte normal
-	import user from '$lib/store/user.js';
 	let name = '';
 	let email = '';
 	let password = '';

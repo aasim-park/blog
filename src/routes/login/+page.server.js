@@ -2,26 +2,29 @@ import { loginSchema } from '$lib/validation/loginSchema.js';
 import { auth } from '$lib/config/firebase.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
-import { signOut } from 'firebase/auth';
+import { redirect } from '@sveltejs/kit';
 
-const authChangePromise = () =>
-	new Promise((res, rej) => {
-		onAuthStateChanged(auth, (users) => {
-			if (!users) rej('User Not Found');
-			res({
-				displayName: users.displayName
-			});
-		});
-	});
+export const load = async ({ locals }) => {
+	if (locals.user) {
+		throw redirect(302, '/');
+	}
+};
+
 
 export const actions = {
-	login: async ({ request }) => {
-		const formData = Object.fromEntries(await request.formData());
+	default: async (event) => {
+		const formData = Object.fromEntries(await event.request.formData());
 		try {
 			loginSchema.parse(formData);
 			const { email, password } = formData;
 			await signInWithEmailAndPassword(auth, email, password);
-			return await authChangePromise();
+			onAuthStateChanged(auth, (users) => {
+				if (users) {
+					event.locals.user = {
+						displayName: users.displayName
+					};
+				}
+			});
 		} catch (err) {
 			if (err.issues) {
 				const { fieldErrors: errors } = err.flatten();
@@ -31,15 +34,6 @@ export const actions = {
 					err: err.code
 				};
 			}
-		}
-	},
-	logout: async () => {
-		console.log('REACED TO LOGOUT');
-		try {
-			await signOut(auth);
-			return { sucess: true };
-		} catch (err) {
-			console.log(err);
 		}
 	}
 };

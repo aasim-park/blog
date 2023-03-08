@@ -1,18 +1,19 @@
 <script>
 	import { page } from '$app/stores';
+	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
-	import user from '$lib/store/user.js';
 	import { enhance, applyAction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation'
+	$: user = $page?.data?.user?.displayName;
 	// consts
 	let currentError;
-	$: isLogedIn = $user === null ? false : true;
 </script>
 
 <header>
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
-			{$user}
+			<!-- {$page?.data?.user?.displayName} -->
 		</a>
 	</div>
 
@@ -36,22 +37,13 @@
 		</svg>
 	</nav>
 	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
-		{#if isLogedIn}
+		{#if user}
 			<form
-				action="?/logout"
-				use:enhance={({ form, data, action, cancel }) => {
-					// `form` is the `<form>` element
-					// `data` is its `FormData` object
-					// `action` is the URL to which the form is posted
-					// `cancel()` will prevent the submission
-
+				action="/logout"
+				use:enhance={() => {
 					return async ({ result }) => {
-						// `result` is an `ActionResult` object
-						if (result.type === 'success') {
-							user.set(null);
-							await applyAction(result);
-							console.log($user)
-						}
+						invalidateAll();
+						await applyAction(result);
 					};
 				}}
 				method="POST"
@@ -64,7 +56,7 @@
 				</button>
 			</form>
 			<p class="hidden md:text-center md:inline">
-				{$user}
+				{user}
 			</p>
 		{:else}
 			<button>
