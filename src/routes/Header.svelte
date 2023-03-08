@@ -2,36 +2,20 @@
 	import { signOut, onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
+	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
-	import user from '$lib/store/user.js';
-
-	// $: isLogedIn = $user === null ? false : true;
-	let loading = true;
-	onAuthStateChanged(auth, (users) => {
-		loading = false;
-		if (users) user.update((val) => (val = { ...users }));
-	});
-	// $: userName = $user === null ? null : user.subscribe(v => v);
-	let userName;
-	user.subscribe((val) => {
-		if (!val) return;
-		userName = val.displayName;
-	});
+	import { enhance, applyAction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation'
+	$: user = $page?.data?.user?.displayName;
+	// consts
 	let currentError;
-	const logout = async () => {
-		try {
-			await signOut(auth);
-			user.update((val) => (val = null));
-		} catch (error) {
-			currentError = error.message;
-		}
-	};
 </script>
 
 <header>
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
+			<!-- {$page?.data?.user?.displayName} -->
 		</a>
 	</div>
 
@@ -54,23 +38,27 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-	<div class="p-2 flex flex-col">
-		{#if loading}
-			<div class="flex items-center justify-center">
-				<div
-					class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-					role="status"
-				>
-					<span
-						class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-						>Loading...</span
-					>
-				</div>
-			</div>
-		{:else if userName}
-			<button class="lg:pt-2" type="button" value="Logout!" on:click={logout}>logout </button>
-			<p class="hidden md:block">
-				{userName}
+	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
+		{#if user}
+			<form
+				action="/logout"
+				use:enhance={() => {
+					return async ({ result }) => {
+						invalidateAll();
+						await applyAction(result);
+					};
+				}}
+				method="POST"
+			>
+				<button
+					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
+					type="submit"
+					value="Logout!"
+					>logout
+				</button>
+			</form>
+			<p class="hidden md:text-center md:inline">
+				{user}
 			</p>
 		{:else}
 			<button>
@@ -86,15 +74,15 @@
 <style lang="postcss">
 	header {
 		display: flex;
-		justify-content: space-around;
-		align-items: center;
+		justify-content: space-between;
+		align-items: flex-start;
 	}
 
 	@media (min-width: 480px) {
 		header {
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-start;
 		}
 	}
 

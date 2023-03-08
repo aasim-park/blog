@@ -1,3 +1,6 @@
+import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import {
 	PUBLIC_apiKey,
 	PUBLIC_authDomain,
@@ -7,8 +10,6 @@ import {
 	PUBLIC_appId,
 	PUBLIC_measurementId
 } from '$env/static/public';
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
 	apiKey: PUBLIC_apiKey,
@@ -21,5 +22,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 // export default firebaseConfig;
