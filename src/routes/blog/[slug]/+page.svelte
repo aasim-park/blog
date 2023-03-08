@@ -1,6 +1,7 @@
 <script>
 	export let data;
-	// console.log(data)
+	import { page } from '$app/stores';
+	$: user = $page?.data?.user?.displayName;
 	const description = data.descriptionHtml.code;
 	const id = data.id;
 	const title = data.title;
@@ -17,10 +18,11 @@
 		browserStorage();
 	}
 </script>
-
+{#if user}
 <div>
 	<a href="/editblog"> edit Blog </a>
 </div>
+{/if}
 <article class="prose break-words md:m-auto">
 	{@html description}
 </article>

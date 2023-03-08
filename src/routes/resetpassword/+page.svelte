@@ -1,7 +1,6 @@
 <script>
     let email=''
 	export let form;
-	console.log(form)
 </script>
 <h1>Reset page</h1>
 <form class="mt-10 flex flex-col items-center" method="POST">
