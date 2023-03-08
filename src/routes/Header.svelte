@@ -1,14 +1,9 @@
 <script>
-	import { signOut, onAuthStateChanged } from 'firebase/auth';
-	import { auth } from '$lib/config/firebase.js';
 	import { page } from '$app/stores';
-	// console.log("Headerpage", $page?.data?.user?.displayName)
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation'
+	import { invalidateAll } from '$app/navigation';
 	$: user = $page?.data?.user?.displayName;
-	// consts
-	let currentError;
 </script>
 
 <header>

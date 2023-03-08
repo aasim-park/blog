@@ -2,21 +2,31 @@
 	let title = '';
 	let excerpt = '';
 	let description = '';
-	import { browser } from '$app/environment'
+	let id = '';
+	import { enhance } from '$app/forms';
+	import { browser } from '$app/environment';
 	if (browser) {
 		let description1 = window.localStorage.getItem('description');
 		let excerpt1 = window.localStorage.getItem('excerpt');
 		let title1 = window.localStorage.getItem('title');
-		let id = window.localStorage.getItem('id');
-		if (id !== null) {
+		let id1 = window.localStorage.getItem('id');
+		if (id1 !== null) {
 			description = description1;
 			excerpt = excerpt1;
 			title = title1;
+			id = id1;
 		}
 	}
 </script>
 
-<form class="mt-10 flex flex-col items-center" method="POST">
+<form
+	class="mt-10 flex flex-col items-center"
+	method="POST"
+	use:enhance={({ form, data, action, cancel }) => {
+		console.log();
+		return async ({ result, update }) => {};
+	}}
+>
 	<div class="mb-4">
 		<label for="title" />
 		<input
@@ -26,6 +36,17 @@
 			placeholder="Title"
 			bind:value={title}
 			name="title"
+		/>
+	</div>
+	<div class="mb-4">
+		<label for="id" />
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+			type="text"
+			id="id"
+			placeholder="Id"
+			bind:value={id}
+			name="id"
 		/>
 	</div>
 	<div class="mb-4">

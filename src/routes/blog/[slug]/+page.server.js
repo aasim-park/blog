@@ -12,6 +12,6 @@ export const load = async function ({ params }) {
 		title: parseData[0].title,
 		excerpt: parseData[0].excerpt,
 		descriptionHtml: compileResponse,
-		description:response[0].description
+		description: response[0].description
 	};
 };
