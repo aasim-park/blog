@@ -19,6 +19,7 @@ FROM node:lts-slim As deploy
 WORKDIR /app
 
 COPY --from=build /app/package.json .
+
 COPY --from=build /app/build .
 
 RUN npm i
