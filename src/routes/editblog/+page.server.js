@@ -1,21 +1,33 @@
 import { post } from '$db/post';
 import { ObjectId } from 'mongodb';
+import { newPostSchema } from '$lib/validation/schema.js';
 
 export const actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
 		const { title, excerpt, description, id } = formData;
-		// console.log(id)
-		const objectid = new ObjectId(id);
+		if (id) {
+			const objectid = new ObjectId(id);
+			try {
+				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
+				return { success: true };
+			} catch (err) {
+				console.log(err);
+			}
+		}
 		try {
-			const data = await post.updateOne(
-				{ _id: objectid },
-				{ $set: { title, excerpt, description } }
-			);
-			await JSON.parse(JSON.stringify(data));
-			return {success:true}
+			newPostSchema.parse(formData);
+			await post.insertOne({ title, excerpt, description });
+			return { success: true };
 		} catch (err) {
-			console.log(err);
+			if (err.issues) {
+				const { fieldErrors: errors } = err.flatten();
+				return { errors };
+			} else {
+				return {
+					err: err.code
+				};
+			}
 		}
 	}
 };

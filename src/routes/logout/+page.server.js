@@ -7,9 +7,10 @@ export const load = async () => {
 };
 
 export const actions = {
-	async default() {
+	async default(event) {
 		try {
 			await signOut(auth);
+			event.locals.user = null;
 			return { sucess: true };
 		} catch (err) {
 			console.log(err);
