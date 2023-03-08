@@ -11,6 +11,7 @@ export const load = async function ({ params }) {
 		id: parseData[0]._id,
 		title: parseData[0].title,
 		excerpt: parseData[0].excerpt,
-		description: compileResponse
+		descriptionHtml: compileResponse,
+		description:response[0].description
 	};
 };

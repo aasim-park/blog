@@ -1,6 +1,7 @@
 <script>
 	export let data;
-	const description = data.description.code;
+	// console.log(data)
+	const description = data.descriptionHtml.code;
 	const id = data.id;
 	const title = data.title;
 	const excerpt = data.excerpt;
@@ -8,7 +9,7 @@
 
 	if (browser) {
 		const browserStorage = () => {
-			window.localStorage.setItem('description', description);
+			window.localStorage.setItem('description', data.description);
 			window.localStorage.setItem('title', title);
 			window.localStorage.setItem('excerpt', excerpt);
 			window.localStorage.setItem('id', id);

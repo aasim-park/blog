@@ -19,7 +19,7 @@
 	{#if user}
 		<button on:click={clearLocalStorage} class="">
 			<a href="/editblog">
-				<img src={plusIcon} alt="Home" />
+				<img src={plusIcon} alt="plusicon" />
 			</a>
 		</button>
 	{/if}
