@@ -10,7 +10,7 @@ export const actions = {
 			const objectid = new ObjectId(id);
 			try {
 				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
-				return { success: true };
+				return { message: "sucessfully updated " };
 			} catch (err) {
 				console.log(err);
 			}
@@ -18,7 +18,7 @@ export const actions = {
 		try {
 			newPostSchema.parse(formData);
 			await post.insertOne({ title, excerpt, description });
-			return { success: true };
+			return {message: "sucessfully Created new Post" };
 		} catch (err) {
 			if (err.issues) {
 				const { fieldErrors: errors } = err.flatten();

@@ -26,6 +26,9 @@
 	method="POST"
 	use:enhance={({ form, data, action, cancel }) => {
 		return async ({ result, update }) => {
+			if (result.data.message) {
+				alert(result.data.message);
+			}
 			applyAction(result);
 		};
 	}}
