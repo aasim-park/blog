@@ -22,7 +22,7 @@
 </script>
 
 <form
-	class="mt-10 flex flex-col items-center"
+	class="mt-10 flex flex-col gap-4 items-center"
 	method="POST"
 	use:enhance={({ form, data, action, cancel }) => {
 		return async ({ result, update }) => {
@@ -33,7 +33,7 @@
 		};
 	}}
 >
-	<div class="mb-1">
+	<div>
 		<label for="id" />
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -42,9 +42,10 @@
 			placeholder="Id"
 			bind:value={id}
 			name="id"
+			disabled
 		/>
 	</div>
-	<div class="mb-1">
+	<div>
 		<label for="title" />
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -59,7 +60,7 @@
 		<span class="py-2 px-1 text-red-400">{form?.errors?.title[0]}</span>
 	{/if}
 
-	<div class="mb-1">
+	<div>
 		<label for="except" />
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -77,6 +78,7 @@
 		<label for="description" />
 		<textarea
 			rows="10"
+			cols="33"
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 			type="text"
 			id="description"
