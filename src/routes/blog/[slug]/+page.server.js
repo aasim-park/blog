@@ -15,3 +15,16 @@ export const load = async function ({ params }) {
 		description: response[0].description
 	};
 };
+
+export const actions = {
+	deletepost: async (event) => {
+		const formData = Object.fromEntries(await event.request.formData());
+		const { id } = formData;
+		const objectid = new ObjectId(id);
+		const deleteResult = await post.deleteOne({ _id:objectid });
+		if (deleteResult.deletedCount === 0) {
+		return {message: `no document found`};
+		}
+		return {message: `sucessfully deleted ${deleteResult.deletedCount}`};
+	}
+};

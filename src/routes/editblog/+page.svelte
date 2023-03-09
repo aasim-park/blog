@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { applyAction } from '$app/forms';
 	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	export let form;
 	let title = '';
 	let excerpt = '';
@@ -28,6 +29,7 @@
 		return async ({ result, update }) => {
 			if (result.data.message) {
 				alert(result.data.message);
+				goto('/blog')
 			}
 			applyAction(result);
 		};
