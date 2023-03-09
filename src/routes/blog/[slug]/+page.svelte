@@ -1,9 +1,9 @@
 <script>
 	export let data;
-	const description = data.descriptionHtml.code;
 	let id = data.id;
 	const title = data.title;
 	const excerpt = data.excerpt;
+	const description = data.descriptionHtml.code;
 	import { browser } from '$app/environment';
 	import { enhance, applyAction } from '$app/forms';
 	import { goto } from '$app/navigation';
