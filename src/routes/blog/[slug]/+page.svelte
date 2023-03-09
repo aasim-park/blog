@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let data;
 	let id = data.id;
 	const title = data.title;

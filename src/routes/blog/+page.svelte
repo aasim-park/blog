@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import plusIcon from '$lib/images/plus_icon.svg';
 	export let data;
 	$: ({ posts } = data);

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import resume from '$lib/resume/Rezume.pdf';
 </script>
 
