@@ -33,7 +33,7 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-	<div class="flex flex-col lg:flex-row lg:gap-3 m-2 p-1">
+	<div class="flex flex-col lg:flex-row lg:gap-3 mt-2">
 		{#if user}
 			<form
 				action="/logout"
