@@ -10,26 +10,31 @@
 <div class="text-column">
 	<div class="title">About</div>
 	<div class="text-justify p-3">
-		Hello! My name is <span class="underline-about">Aasim Shaikh </span>and I am a software
-		developer based in Mumbai. My area of expertise is cloud engineering, and I have experience
-		setting up cloud virtual machines (VMs) in <span class="underline-about"> GCP, AWS,</span> and
-		<span class="underline-about">Digital Ocean</span>
-		environments. I am also skilled in creating Docker files and orchestrating them using Docker Compose.
-		For container workloads, I have experience using AWS services such as
-		<span class="underline-about">EKS </span>and <span class="underline-about">ECS</span> , and in
-		GCP, I have deployed container workloads on GKE standard,
-		<span class="underline-about"> Cloud Run </span>, and
-		<span class="underline-about"> App Engine </span>
-		. In terms of CI/CD, I have used AWS Pipeline and
-		<span class="underline-about">Cloud Build</span>
-		in GCP. For database management, I have set up cloud-specific databases such as Amazon RDS and DocumentDB.
-		For basic setups, I create VMs for websites, set up networking with private and public routing options,
-		and create shell scripts to unify workloads. With respect to source code management (SCM), I have
-		experience using
-		<span class="underline-about">Git, GitHub, Bitbucket </span>, and
-		<span class="underline-about">GitLab</span>, as well as cloud-specific SCMs. Other cloud tools I
-		have used include S3, Secret Manager, Elastic Beanstalk, Cloud Functions, Lambda, and various
-		microservices and serverless tools.
+		<p>
+			Welcome to my blog! My name is Aasim Shaikh, and I'm the writer and creator behind this blog.
+			I started this blog as a way to share my thoughts and experiences on Cloud and DevOps and to
+			connect with others who share my passion.
+		</p>
+		<p>
+			As someone who has always loved DevOps and the cloud, I wanted to create a space where I could
+			explore this interest in more depth and share my insights with others. Whether you're a fellow
+			I hope you'll find something valuable on my blog for IT and DevOps enthusiast or simply
+			curious about learning more.
+		</p>
+		<p>
+			In my posts, I cover a wide range of topics related to the cloud, from DevOps to programming
+			languages. It's never too late and I strive to communicate this message in a clear and
+			engaging way.
+		</p>
+		<p>
+			When I'm not blogging, you can usually find me playing video games, listening to audiobooks,
+			meditating, or spending time with my family, pets, or friends.
+		</p>
+		<p>
+			Thank you for visiting my blog, and I hope you enjoy your time here. If you have any questions
+			or comments, feel free to reach out to me at the contact details below. I love hearing from my
+			readers and welcome your feedback.
+		</p>
 	</div>
 	<div class="title">Contact</div>
 	<div class="flex m-2 justify-around">
