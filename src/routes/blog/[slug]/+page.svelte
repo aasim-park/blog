@@ -28,17 +28,16 @@
 	{@html description}
 </article>
 
-
 <form
-action="?/deletepost"
-use:enhance={() => {
-	return async ({ result }) => {
-		if (result.type === 'success') {
-			if (result?.data?.message) {
-					alert(result?.data?.message); 
-					goto('/blog')
+	action="?/deletepost"
+	use:enhance={() => {
+		return async ({ result }) => {
+			if (result.type === 'success') {
+				if (result?.data?.message) {
+					alert(result?.data?.message);
+					goto('/blog');
 				}
-		}
+			}
 			await applyAction(result);
 		};
 	}}

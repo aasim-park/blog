@@ -7,12 +7,12 @@ export const actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
 		const { title, excerpt, description, id } = formData;
-		const numberId = Number(id)
+		const numberId = Number(id);
 		if (numberId) {
 			const objectid = new ObjectId(numberId);
 			try {
 				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
-				return { message: "sucessfully updated " };
+				return { message: 'sucessfully updated ' };
 			} catch (err) {
 				console.log(err);
 			}
@@ -20,7 +20,7 @@ export const actions = {
 		try {
 			newPostSchema.parse(formData);
 			await post.insertOne({ title, excerpt, description });
-			return {message: "sucessfully Created new Post" };
+			return { message: 'sucessfully Created new Post' };
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();

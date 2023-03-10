@@ -49,5 +49,5 @@ export const restSchema = z.object({
 		.string({ required_error: 'Email is required' })
 		.trim()
 		.max(64, { message: 'Name must be less than 64 characters' })
-		.email({ message: 'Email must be a valid email address' }),
+		.email({ message: 'Email must be a valid email address' })
 });

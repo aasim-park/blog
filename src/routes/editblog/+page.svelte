@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import { enhance } from '$app/forms';
 	import { applyAction } from '$app/forms';
 	import { browser } from '$app/environment';
@@ -28,9 +28,9 @@
 	use:enhance={({ form, data, action, cancel }) => {
 		return async ({ result, update }) => {
 			if (result.type === 'success') {
-					if (result?.data?.message) {
+				if (result?.data?.message) {
 					alert(result?.data?.message);
-					goto('/blog')
+					goto('/blog');
 				}
 			}
 			applyAction(result);

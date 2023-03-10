@@ -29,7 +29,7 @@ export const actions: Actions = {
 		const objectid = new ObjectId(id);
 		const deleteResult = await post.deleteOne({ _id: objectid });
 		if (deleteResult.deletedCount === 0) {
-			return  { message: `no document found` }
+			return { message: `no document found` };
 		}
 		return { message: `sucessfully deleted ${deleteResult.deletedCount}` };
 	}
