@@ -5,12 +5,12 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			user: {
-				displayName: string | null
-			}
+				displayName: string | null;
+			};
 		}
 		// interface PageData {}
 		// interface Platform {}
 	}
 }
 
-export {Locals};
+export {};

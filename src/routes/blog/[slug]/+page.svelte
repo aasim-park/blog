@@ -1,12 +1,13 @@
 <script lang="ts">
-	export let data;
+	import { browser } from '$app/environment';
+	import { enhance, applyAction } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import type { PageData } from './$types'
+	export let data:PageData;
 	let id = data.id;
 	const title = data.title;
 	const excerpt = data.excerpt;
 	const description = data.descriptionHtml.code;
-	import { browser } from '$app/environment';
-	import { enhance, applyAction } from '$app/forms';
-	import { goto } from '$app/navigation';
 	
 	if (browser) {
 		const browserStorage = () => {

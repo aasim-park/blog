@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     let email=''
 	export let form;
 </script>

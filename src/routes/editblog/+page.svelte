@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { enhance } from '$app/forms';
 	import { applyAction } from '$app/forms';
 	import { browser } from '$app/environment';
