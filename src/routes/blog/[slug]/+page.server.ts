@@ -19,18 +19,17 @@ export const load: PageServerLoad = async function ({ params }) {
 			description: response[0].description
 		};
 	}
-	throw redirect(302, '/');
+	throw redirect(302, '/blog');
 };
-
 
 export const actions: Actions = {
 	deletepost: async (event) => {
 		const formData = await event.request.formData();
-		const id = formData.get('id');
-		// const objectid = new ObjectId(id);
-		const deleteResult = await post.deleteOne({ _id: id });
+		const id = String(formData.get('id'));
+		const objectid = new ObjectId(id);
+		const deleteResult = await post.deleteOne({ _id: objectid });
 		if (deleteResult.deletedCount === 0) {
-			return { message: `no document found` };
+			return  { message: `no document found` }
 		}
 		return { message: `sucessfully deleted ${deleteResult.deletedCount}` };
 	}

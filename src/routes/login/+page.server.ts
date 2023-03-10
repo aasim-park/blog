@@ -3,6 +3,7 @@ import { auth } from '$lib/config/firebase.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { redirect } from '@sveltejs/kit';
+import { ZodError } from "zod";
 
 export const load = async ({ locals }) => {
 	if (locals.user) {

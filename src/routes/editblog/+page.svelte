@@ -13,7 +13,7 @@
 		let excerpt1 = window.localStorage.getItem('excerpt');
 		let title1 = window.localStorage.getItem('title');
 		let id1 = window.localStorage.getItem('id');
-		if (id1 !== null) {
+		if (id1) {
 			description = description1;
 			excerpt = excerpt1;
 			title = title1;
@@ -27,9 +27,11 @@
 	method="POST"
 	use:enhance={({ form, data, action, cancel }) => {
 		return async ({ result, update }) => {
-			if (result.data.message) {
-				alert(result.data.message);
-				goto('/blog')
+			if (result.type === 'success') {
+					if (result?.data?.message) {
+					alert(result?.data?.message);
+					goto('/blog')
+				}
 			}
 			applyAction(result);
 		};
@@ -81,7 +83,6 @@
 			rows="10"
 			cols="33"
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-			type="text"
 			id="description"
 			placeholder="Description"
 			bind:value={description}

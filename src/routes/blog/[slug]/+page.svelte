@@ -2,13 +2,13 @@
 	import { browser } from '$app/environment';
 	import { enhance, applyAction } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import type { PageData } from './$types'
-	export let data:PageData;
+	import type { PageData } from './$types';
+	export let data: PageData;
 	let id = data.id;
 	const title = data.title;
 	const excerpt = data.excerpt;
-	const description = data.descriptionHtml.code;
-	
+	const description = data?.descriptionHtml?.code;
+
 	if (browser) {
 		const browserStorage = () => {
 			window.localStorage.setItem('description', data.description);
@@ -28,15 +28,18 @@
 	{@html description}
 </article>
 
+
 <form
-	action="?/deletepost"
-	use:enhance={() => {
-		return async ({ result }) => {
-			if (result.data.message) {
-				alert(result.data.message);
-			}
+action="?/deletepost"
+use:enhance={() => {
+	return async ({ result }) => {
+		if (result.type === 'success') {
+			if (result?.data?.message) {
+					alert(result?.data?.message); 
+					goto('/blog')
+				}
+		}
 			await applyAction(result);
-			goto('/blog')
 		};
 	}}
 	method="POST"
