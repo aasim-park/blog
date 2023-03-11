@@ -4,8 +4,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import bcrypt from 'bcrypt';
 
-export const load = async ({ locals }) => {
-	if (locals.user) {
+export const load = async (event) => {
+	if (event.locals.user) {
 		throw redirect(302, '/');
 	}
 };

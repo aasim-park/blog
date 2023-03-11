@@ -8,7 +8,8 @@
 	const title = data.title;
 	const excerpt = data.excerpt;
 	const description = data?.descriptionHtml?.code;
-
+	import { page } from '$app/stores';
+	$: user = $page?.data?.user?.name;
 	if (browser) {
 		const browserStorage = () => {
 			window.localStorage.setItem('description', data.description);
@@ -28,6 +29,7 @@
 	{@html description}
 </article>
 
+{#if user}
 <form
 	action="?/deletepost"
 	use:enhance={() => {
@@ -61,3 +63,4 @@
 		>deletepost
 	</button>
 </form>
+{/if}

@@ -1,7 +1,6 @@
 import { redirect } from '@sveltejs/kit';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '$lib/config/firebase.js';
 import { restSchema } from '$lib/validation/schema.js';
+import { ZodError } from "zod";
 
 export const load = async ({ locals }) => {
 	if (locals.user) {
@@ -15,14 +14,13 @@ export const actions = {
 		const { email } = formData;
 		try {
 			restSchema.parse(formData);
-			await sendPasswordResetEmail(auth, email);
 		} catch (err) {
-			if (err.issues) {
+			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
 				return {
-					err: err.code
+					message: "Something went wrong"
 				};
 			}
 		}

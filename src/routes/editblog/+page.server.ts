@@ -8,7 +8,7 @@ export const actions = {
 		const formData = Object.fromEntries(await event.request.formData());
 		const { title, excerpt, description, id } = formData;
 		const numberId = Number(id);
-		if (numberId) {
+		if (id) {
 			const objectid = new ObjectId(numberId);
 			try {
 				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });

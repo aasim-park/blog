@@ -4,10 +4,11 @@ import { ObjectId } from 'mongodb';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load: PageServerLoad = async function ({ params }) {
-	const checkId = ObjectId.isValid(params.slug);
+
+export const load: PageServerLoad = async function (event) {
+	const checkId = ObjectId.isValid(event.params.slug);
 	if (checkId === true) {
-		const id = new ObjectId(params.slug);
+		const id = new ObjectId(event.params.slug);
 		const response = await post.find({ _id: id }).toArray();
 		const compileResponse = await compile(response[0].description);
 		const parseData = await JSON.parse(JSON.stringify(response));
@@ -16,7 +17,8 @@ export const load: PageServerLoad = async function ({ params }) {
 			title: parseData[0].title,
 			excerpt: parseData[0].excerpt,
 			descriptionHtml: compileResponse,
-			description: response[0].description
+			description: response[0].description,
+			user: event.locals.user
 		};
 	}
 	throw redirect(302, '/blog');

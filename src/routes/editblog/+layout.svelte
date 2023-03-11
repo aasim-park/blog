@@ -3,7 +3,7 @@
 </script>
 
 <div class="app">
-	{#if $page?.data?.user?.displayName}
+	{#if $page?.data?.user}
 		<main>
 			<slot />
 		</main>
