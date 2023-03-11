@@ -37,7 +37,6 @@ export const actions = {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
-				console.log('err==>', err);
 				return { err: 'something went wrong' };
 			}
 		}

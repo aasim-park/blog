@@ -46,14 +46,16 @@ export const actions = {
 				// set cookie to expire after a month
 				maxAge: 60 * 60 * 24 * 30
 			});
+			return {
+				success: true
+			};
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
-				console.log(err)
 				return {
-					err: "Something went wrong"
+					err: 'Something went wrong'
 				};
 			}
 		}

@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { applyAction, enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+
+
 	export let form;
 	let email = '';
 	let password = '';
@@ -6,8 +10,21 @@
 
 <p class="text-center text-4xl mt-10">Sign In</p>
 
-
-<form class="mt-10 flex flex-col items-center" method="POST">
+<form
+	class="mt-10 flex flex-col items-center"
+	method="POST"
+	use:enhance={() => {
+		return async ({ result }) => {
+			if (result.type === 'success') {
+				if (result?.data?.success) {
+					alert('successfully LogIn');
+					goto('/');
+				}
+			}
+			await applyAction(result);
+		};
+	}}
+>
 	{#if form?.err}
 		<span class="py-2 px-1 text-red-400">{form?.err}</span>
 	{/if}

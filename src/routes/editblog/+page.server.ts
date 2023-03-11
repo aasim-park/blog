@@ -14,7 +14,7 @@ export const actions = {
 				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
 				return { message: 'sucessfully updated ' };
 			} catch (err) {
-				console.log(err);
+				return { err: 'something went wrong' };
 			}
 		}
 		try {

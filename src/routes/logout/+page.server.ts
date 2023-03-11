@@ -9,10 +9,16 @@ export const actions = {
 		try {
 			event.cookies.set('session', '', {
 				path: '/',
-				expires: new Date(0),
-			  })
+				expires: new Date(0)
+			});
+			event.locals.user = null
+			return {
+				success: true
+			};
 		} catch (err) {
-			console.log(err);
+			return {
+				err: "Something went wrong"
+			};
 		}
 	}
 };
