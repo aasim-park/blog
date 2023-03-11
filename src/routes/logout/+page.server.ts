@@ -1,6 +1,4 @@
 import { redirect } from '@sveltejs/kit';
-import { signOut } from 'firebase/auth';
-import { auth } from '$lib/config/firebase.js';
 
 export const load = async () => {
 	throw redirect(302, '/');
@@ -9,14 +7,12 @@ export const load = async () => {
 export const actions = {
 	async default(event) {
 		try {
-			await signOut(auth);
-			event.locals.user = null;
-			return { success: true };
+			event.cookies.set('session', '', {
+				path: '/',
+				expires: new Date(0),
+			  })
 		} catch (err) {
 			console.log(err);
 		}
-
-		// redirect the user
-		throw redirect(302, '/');
 	}
 };
