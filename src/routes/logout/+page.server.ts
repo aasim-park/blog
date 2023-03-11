@@ -11,13 +11,13 @@ export const actions = {
 				path: '/',
 				expires: new Date(0)
 			});
-			event.locals.user = null
+			event.locals.user = null;
 			return {
 				success: true
 			};
 		} catch (err) {
 			return {
-				err: "Something went wrong"
+				err: 'Something went wrong'
 			};
 		}
 	}

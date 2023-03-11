@@ -41,8 +41,8 @@
 					return async ({ result }) => {
 						if (result.type === 'success') {
 							if (result?.data?.success) {
-								alert("successfully Logout")
-								goto('/')
+								alert('successfully Logout');
+								goto('/');
 							}
 						}
 						await applyAction(result);
