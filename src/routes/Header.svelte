@@ -3,13 +3,14 @@
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
 	import { goto } from '$app/navigation';
-	$: user = $page?.data?.user?.displayName;
+	$: user = $page?.data?.user?.name;
 </script>
 
 <header>
 	<div class="corner">
 		<a href="/">
-			<img src={logo} alt="Home" />
+			<!-- <img src={logo} alt="Home" /> -->
+			{user}
 		</a>
 	</div>
 
