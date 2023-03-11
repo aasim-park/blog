@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { applyAction, enhance } from '$app/forms';
+	import { goto, invalidateAll } from '$app/navigation';
 	export let form;
 	let name = '';
 	let email = '';
@@ -6,11 +8,25 @@
 </script>
 
 <h1>Sign Up!</h1>
-{#if form?.err}
-	<span class="py-2 px-1 text-red-400">{form?.err}</span>
-{/if}
 
-<form class="mt-10 flex flex-col items-center" method="POST">
+<form
+	class="mt-10 flex flex-col items-center"
+	method="POST"
+	use:enhance={({ data }) => {
+		return async ({ result }) => {
+			invalidateAll;
+			if (result.type == 'success') {
+				alert(result?.data?.message);
+				goto('/login');
+			}
+			await applyAction(result);
+		};
+	}}
+>
+	{#if form?.user}
+		<p class="py-2 px-1 text-red-400">Email Is is Registed already.</p>
+	{/if}
+
 	{#if form?.err}
 		<span class="py-2 px-1 text-red-400">{form?.err}</span>
 	{/if}
@@ -56,11 +72,8 @@
 	{#if form?.errors?.password}
 		<span class="py-2 px-1 text-red-400">{form?.errors?.password[0]}</span>
 	{/if}
-	{#if form?.errors?.password}
-		<span class="py-2 px-1 text-red-400">{form?.errors?.password[0]}</span>
-	{/if}
 	<button
 		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-		type="submit">Sign In</button
+		type="submit">Sign Up</button
 	>
 </form>

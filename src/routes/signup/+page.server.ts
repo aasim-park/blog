@@ -1,9 +1,8 @@
 import { singupSchema } from '$lib/validation/schema.js';
-import { auth } from '$lib/config/firebase.js';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { onAuthStateChanged } from 'firebase/auth';
-import { redirect } from '@sveltejs/kit';
-import { ZodError } from "zod";
+import { fail, redirect } from '@sveltejs/kit';
+import { ZodError } from 'zod';
+import { user } from '$db/user';
+import bcrypt from 'bcrypt';
 
 export const load = async (event) => {
 	if (event.locals.user) {
@@ -13,19 +12,33 @@ export const load = async (event) => {
 
 export const actions = {
 	default: async (event) => {
-		const formData = Object.fromEntries(await event.request.formData());
+		const data = Object.fromEntries(await event.request.formData());
 		try {
-			singupSchema.parse(formData);
-			const { email, password, name } = formData;
-		
+			const singupData = singupSchema.parse(data);
+			const username = singupData.name;
+			const email = singupData.email;
+			const password = singupData.password;
+			const userExists = await user.findOne({ 'data.email': email });
+			if (userExists?.data) {
+				return fail(400, { user: true });
+			}
+
+			await user.insertOne({
+				data: {
+					username,
+					email,
+					passwordHash: await bcrypt.hash(password, 10),
+					userAuthToken: crypto.randomUUID()
+				}
+			});
+			return { message: 'sucessfully created acoount' };
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
-				return {
-					err
-				};
+				console.log('err==>', err);
+				return { err: 'something went wrong' };
 			}
 		}
 	}
