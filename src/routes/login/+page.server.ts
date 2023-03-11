@@ -13,10 +13,11 @@ export const load = async ({ locals }) => {
 
 export const actions = {
 	default: async (event) => {
-		const formData = Object.fromEntries(await event.request.formData());
+		const data = await event.request.formData()
 		try {
-			loginSchema.parse(formData);
-			const { email, password } = formData;
+			loginSchema.safeParse(data);
+			const email = String(data.get("email"))
+			const password = String(data.get("password"))
 			await signInWithEmailAndPassword(auth, email, password);
 			onAuthStateChanged(auth, (users) => {
 				if (users) {
@@ -26,12 +27,12 @@ export const actions = {
 				}
 			});
 		} catch (err) {
-			if (err.issues) {
+			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
 				return {
-					err: err.code
+					err
 				};
 			}
 		}

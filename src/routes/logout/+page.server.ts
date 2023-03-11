@@ -11,7 +11,7 @@ export const actions = {
 		try {
 			await signOut(auth);
 			event.locals.user = null;
-			return { sucess: true };
+			return { success: true };
 		} catch (err) {
 			console.log(err);
 		}

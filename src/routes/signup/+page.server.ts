@@ -3,6 +3,7 @@ import { auth } from '$lib/config/firebase.js';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { redirect } from '@sveltejs/kit';
+import { ZodError } from "zod";
 
 export const load = async ({ locals }) => {
 	if (locals.user) {
@@ -26,12 +27,12 @@ export const actions = {
 				}
 			});
 		} catch (err) {
-			if (err.issues) {
+			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
 				return { errors };
 			} else {
 				return {
-					err: err.code
+					err
 				};
 			}
 		}

@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	$: user = $page?.data?.user?.displayName;
 </script>
 
@@ -10,7 +10,6 @@
 	<div class="corner">
 		<a href="/">
 			<img src={logo} alt="Home" />
-			<!-- {$page?.data?.user?.displayName} -->
 		</a>
 	</div>
 
@@ -39,7 +38,12 @@
 				action="/logout"
 				use:enhance={() => {
 					return async ({ result }) => {
-						invalidateAll();
+						if (result.type === 'success') {
+							if (result?.data?.success) {
+								alert("successfully Logout")
+								goto('/')
+							}
+						}
 						await applyAction(result);
 					};
 				}}

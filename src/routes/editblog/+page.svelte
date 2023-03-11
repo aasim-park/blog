@@ -9,7 +9,7 @@
 	let description = '';
 	let id = '';
 	if (browser) {
-		let description1 = window.localStorage.getItem('description');
+		let description1= window.localStorage.getItem('description');
 		let excerpt1 = window.localStorage.getItem('excerpt');
 		let title1 = window.localStorage.getItem('title');
 		let id1 = window.localStorage.getItem('id');
