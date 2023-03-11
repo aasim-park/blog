@@ -6,11 +6,15 @@
 
 <p class="text-center text-4xl mt-10">Sign In</p>
 
-{#if form?.err}
-	<span class="py-2 px-1 text-red-400">{form?.err}</span>
-{/if}
 
 <form class="mt-10 flex flex-col items-center" method="POST">
+	{#if form?.err}
+		<span class="py-2 px-1 text-red-400">{form?.err}</span>
+	{/if}
+	{#if form?.credentials}
+		<span class="py-2 px-1 text-red-400">Creditanials doesnt match</span>
+	{/if}
+
 	<div class="m-2">
 		<label for="email" />
 		<input
