@@ -5,8 +5,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { redirect } from '@sveltejs/kit';
 import { ZodError } from "zod";
 
-export const load = async ({ locals }) => {
-	if (locals.user) {
+export const load = async (event) => {
+	if (event.locals.user) {
 		throw redirect(302, '/');
 	}
 };
@@ -17,15 +17,7 @@ export const actions = {
 		try {
 			singupSchema.parse(formData);
 			const { email, password, name } = formData;
-			await createUserWithEmailAndPassword(auth, email, password);
-			await updateProfile(auth.currentUser, { displayName: name });
-			onAuthStateChanged(auth, (users) => {
-				if (users) {
-					event.locals.user = {
-						displayName: users.displayName
-					};
-				}
-			});
+		
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
