@@ -42,7 +42,7 @@ export const actions = {
 				// https://developer.mozilla.org/en-US/docs/Glossary/CSRF
 				sameSite: 'strict',
 				// only sent over HTTPS in production
-				secure: false,
+				secure: true,
 				// set cookie to expire after a month
 				maxAge: 60 * 60 * 24 * 30
 			});
@@ -52,7 +52,7 @@ export const actions = {
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const { fieldErrors: errors } = err.flatten();
-				return { errors };
+				return fail(400, { errors });
 			} else {
 				return {
 					err: 'Something went wrong'

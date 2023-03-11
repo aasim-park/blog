@@ -1,16 +1,18 @@
 import { redirect } from '@sveltejs/kit';
 
-export const load = async () => {
-	throw redirect(302, '/');
+export const load = async (event) => {
+	if (event.locals.user) {
+		throw redirect(302, '/');
+	}
+	return {
+		user: event.locals.user
+	};
 };
 
 export const actions = {
 	async default(event) {
 		try {
-			event.cookies.set('session', '', {
-				path: '/',
-				expires: new Date(0)
-			});
+			event.cookies.delete('session')
 			event.locals.user = null;
 			return {
 				success: true

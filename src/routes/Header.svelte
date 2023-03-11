@@ -2,15 +2,15 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import { enhance, applyAction } from '$app/forms';
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	$: user = $page?.data?.user?.name;
 </script>
 
 <header>
 	<div class="corner">
 		<a href="/">
-			<!-- <img src={logo} alt="Home" /> -->
-			{user}
+			<img src={logo} alt="Home" />
+			<!-- {user} -->
 		</a>
 	</div>
 
@@ -43,6 +43,7 @@
 							if (result?.data?.success) {
 								alert('successfully Logout');
 								goto('/');
+								await invalidateAll();
 							}
 						}
 						await applyAction(result);
