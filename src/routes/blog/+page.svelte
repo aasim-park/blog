@@ -3,7 +3,7 @@
 	import plusIcon from '$lib/images/plus_icon.svg';
 	export let data: PageData;
 	$: ({ posts } = data);
-	// 
+	//
 	const clearLocalStorage = () => {
 		window.localStorage.clear();
 	};

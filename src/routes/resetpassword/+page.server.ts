@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { restSchema } from '$lib/validation/schema.js';
-import { ZodError } from "zod";
+import { ZodError } from 'zod';
 
 export const load = async ({ locals }) => {
 	if (locals.user) {
@@ -20,7 +20,7 @@ export const actions = {
 				return { errors };
 			} else {
 				return {
-					message: "Something went wrong"
+					message: 'Something went wrong'
 				};
 			}
 		}

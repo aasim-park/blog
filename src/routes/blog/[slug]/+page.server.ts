@@ -4,7 +4,6 @@ import { ObjectId } from 'mongodb';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
-
 export const load: PageServerLoad = async function (event) {
 	const checkId = ObjectId.isValid(event.params.slug);
 	if (checkId === true) {
