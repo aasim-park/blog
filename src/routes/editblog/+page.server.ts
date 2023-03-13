@@ -7,9 +7,9 @@ export const actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
 		const { title, excerpt, description, id } = formData;
-		const numberId = Number(id);
+		const stringId = String(id);
 		if (id) {
-			const objectid = new ObjectId(numberId);
+			const objectid = new ObjectId(stringId);
 			try {
 				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
 				return { message: 'sucessfully updated ' };
