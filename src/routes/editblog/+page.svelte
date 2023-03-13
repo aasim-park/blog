@@ -9,9 +9,9 @@
 	let description = '';
 	let id = '';
 	if (browser) {
-		let description1 = window.localStorage.getItem('description');
-		let excerpt1 = window.localStorage.getItem('excerpt');
-		let title1 = window.localStorage.getItem('title');
+		let description1 = window.localStorage.getItem('description') as string;
+		let excerpt1 = window.localStorage.getItem('excerpt')as string;
+		let title1 = window.localStorage.getItem('title')as string;
 		let id1 = window.localStorage.getItem('id');
 		if (id1) {
 			description = description1;
