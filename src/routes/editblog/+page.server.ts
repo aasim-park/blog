@@ -12,6 +12,7 @@ export const actions = {
 		const description = postData.description;
 		const access = postData.access;
 		const id = postData.id;
+		const userId = String(event.cookies.get('user'));
 		if (id) {
 			const objectid = new ObjectId(id);
 			try {
@@ -22,7 +23,7 @@ export const actions = {
 			}
 		}
 		try {
-			await post.insertOne({ title, excerpt, description, access });
+			await post.insertOne({ title, excerpt, description, access, userId });
 			return { message: 'sucessfully Created new Post' };
 		} catch (err) {
 			if (err instanceof ZodError) {

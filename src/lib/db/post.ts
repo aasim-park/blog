@@ -7,5 +7,6 @@ interface Post {
 	excerpt: string;
 	description: string;
 	access: string;
+	userId: string;
 }
 export const post = db.collection<Post>('post');

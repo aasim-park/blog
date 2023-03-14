@@ -7,6 +7,7 @@ interface User {
 		email: string;
 		passwordHash: string;
 		userAuthToken: string;
+		userId: string;
 	};
 }
 export const user = db.collection<User>('user');

@@ -28,7 +28,8 @@ export const actions = {
 					username,
 					email,
 					passwordHash: await bcrypt.hash(password, 10),
-					userAuthToken: crypto.randomUUID()
+					userAuthToken: crypto.randomUUID(),
+					userId: crypto.randomUUID()
 				}
 			});
 			return { message: 'sucessfully created acoount' };
