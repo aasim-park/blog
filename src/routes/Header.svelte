@@ -79,15 +79,14 @@
 		justify-content: space-between;
 		align-items: flex-start;
 		justify-content: space-between;
-		align-items: flex-start;
+		align-items: center;
 	}
 
 	@media (min-width: 480px) {
 		header {
 			display: flex;
 			justify-content: space-between;
-			align-items: flex-start;
-			align-items: flex-start;
+			align-items: center;
 		}
 	}
 

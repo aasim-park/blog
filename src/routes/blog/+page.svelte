@@ -1,6 +1,7 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import plusIcon from '$lib/images/plus_icon.svg';
-	export let data;
+	export let data:PageData;
 	$: ({ posts } = data);
 	//
 	const clearLocalStorage = () => {
@@ -20,7 +21,7 @@
 		</a>
 	</button>
 	{#each posts as post}
-		<article class="flex flex-col p-4">
+		<article class="flex gap-2 flex-col p-4">
 			<a href="/blog/{post._id}">
 				<h1>{post.title}</h1>
 			</a>
