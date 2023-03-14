@@ -13,11 +13,9 @@ export const load = async (event) => {
 export const actions = {
 	default: async (event) => {
 		const data = Object.fromEntries(await event.request.formData());
+		const singupData = singupSchema.parse(data);
+		const { name, email, password } = singupData;
 		try {
-			const singupData = singupSchema.parse(data);
-			const username = singupData.name;
-			const email = singupData.email;
-			const password = singupData.password;
 			const userExists = await user.findOne({ 'data.email': email });
 			if (userExists?.data) {
 				return fail(400, { user: true });
@@ -25,7 +23,7 @@ export const actions = {
 
 			await user.insertOne({
 				data: {
-					username,
+					username: name,
 					email,
 					passwordHash: await bcrypt.hash(password, 10),
 					userAuthToken: crypto.randomUUID(),
