@@ -36,6 +36,7 @@
 	<div class="flex flex-col lg:flex-row lg:gap-3 mt-2">
 		{#if user}
 			<form
+				class="pr-3"
 				action="/logout"
 				use:enhance={() => {
 					return async ({ result }) => {
@@ -62,7 +63,7 @@
 				{user}
 			</p>
 		{:else}
-			<button>
+			<button class="pr-2">
 				<a
 					class="p-1 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold lg:py-2 lg:px-4 rounded focus:outline-none focus:shadow-outline"
 					href="/login">Sign in</a

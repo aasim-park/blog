@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import plusIcon from '$lib/images/plus_icon.svg';
-	export let data: PageData;
+	export let data;
 	$: ({ posts } = data);
 	//
 	const clearLocalStorage = () => {
@@ -15,17 +14,18 @@
 </svelte:head>
 
 <div class=" flex flex-col lg:flex lg:flex-row">
-	<button on:click={clearLocalStorage} class="self-end p-4">
+	<button on:click={clearLocalStorage} class="self-end p-2">
 		<a href="/editblog">
 			<img src={plusIcon} alt="plusicon" class="m-auto" /> Add a new blog
 		</a>
 	</button>
 	{#each posts as post}
-		<article class="p-4">
+		<article class="flex flex-col p-4">
 			<a href="/blog/{post._id}">
 				<h1>{post.title}</h1>
 			</a>
 			<h2>{post.excerpt}</h2>
+			<h3 class=" self-end w-fit p-2 rounded-lg bg-slate-300"># {post.access}</h3>
 		</article>
 	{/each}
 </div>
