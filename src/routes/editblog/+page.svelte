@@ -48,8 +48,11 @@
 			name="id"
 		/>
 	</div>
+
 	<div>
-		<label for="title" />
+		<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="title">
+			Title
+		</label>
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 			type="text"
@@ -62,9 +65,10 @@
 	{#if form?.errors?.title}
 		<span class="py-2 px-1 text-red-400">{form?.errors?.title[0]}</span>
 	{/if}
-
 	<div>
-		<label for="except" />
+		<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="excerpt">
+			Excerpt
+		</label>
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 			type="text"
@@ -78,7 +82,12 @@
 		<span class="py-2 px-1 text-red-400">{form?.errors?.excerpt[0]}</span>
 	{/if}
 	<div>
-		<label for="description" />
+		<label
+			class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+			for="description"
+		>
+			description
+		</label>
 		<textarea
 			rows="10"
 			cols="33"
@@ -92,6 +101,34 @@
 	{#if form?.errors?.description}
 		<span class="py-2 px-1 text-red-400">{form?.errors?.description[0]}</span>
 	{/if}
+	<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+		<label
+			class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+			for="User Access"
+		>
+			User Access
+		</label>
+		<div class="relative">
+			<select
+				class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+				id="User Access"
+				name="access"
+			>
+				<option>Public</option>
+				<option>Private</option>
+			</select>
+			<div
+				class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+			>
+				<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+					><path
+						d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+					/></svg
+				>
+			</div>
+		</div>
+	</div>
+
 	<button
 		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 		type="submit">Submit</button

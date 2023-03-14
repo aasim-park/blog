@@ -1,25 +1,28 @@
 import { post } from '$db/post';
 import { ObjectId } from 'mongodb';
-import { newPostSchema } from '$lib/validation/schema.js';
+import { postSchema } from '$lib/validation/schema.js';
 import { ZodError } from 'zod';
 
 export const actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
-		const { title, excerpt, description, id } = formData;
-		const stringId = String(id);
+		const postData = postSchema.parse(formData);
+		const title = postData.title;
+		const excerpt = postData.excerpt;
+		const description = postData.description;
+		const access = postData.access;
+		const id = postData.id;
 		if (id) {
-			const objectid = new ObjectId(stringId);
+			const objectid = new ObjectId(id);
 			try {
-				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description } });
+				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description, access } });
 				return { message: 'sucessfully updated ' };
 			} catch (err) {
 				return { err: 'something went wrong' };
 			}
 		}
 		try {
-			newPostSchema.parse(formData);
-			await post.insertOne({ title, excerpt, description });
+			await post.insertOne({ title, excerpt, description, access });
 			return { message: 'sucessfully Created new Post' };
 		} catch (err) {
 			if (err instanceof ZodError) {

@@ -12,7 +12,8 @@ export const loginSchema = z.object({
 		.trim()
 });
 
-export const newPostSchema = z.object({
+export const postSchema = z.object({
+	id: z.string({ required_error: 'id is required' }).optional(),
 	title: z
 		.string({ required_error: 'Title is required' })
 		.min(4, { message: 'Title must be at least 4 characters' })
@@ -25,7 +26,8 @@ export const newPostSchema = z.object({
 	description: z
 		.string({ required_error: 'Description is required' })
 		.min(6, { message: 'Description must be at least 6 characters' })
-		.trim()
+		.trim(),
+	access: z.string({ required_error: 'access is required' })
 });
 
 export const singupSchema = z.object({
