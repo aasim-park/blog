@@ -16,8 +16,16 @@ export const actions = {
 		if (id) {
 			const objectid = new ObjectId(id);
 			try {
-				await post.updateOne({ _id: objectid }, { $set: { title, excerpt, description, access } });
-				return { message: 'sucessfully updated ' };
+				const userExits = await post.findOne({ _id: objectid });
+				const userCheck = userExits?.userId === userId;
+				if (userCheck) {
+					await post.updateOne(
+						{ _id: objectid },
+						{ $set: { title, excerpt, description, access } }
+					);
+					return { message: 'sucessfully updated ' };
+				}
+				return { message: 'not an owner of post' };
 			} catch (err) {
 				return { err: 'something went wrong' };
 			}

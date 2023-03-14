@@ -28,10 +28,16 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const id = String(formData.get('id'));
 		const objectid = new ObjectId(id);
-		const deleteResult = await post.deleteOne({ _id: objectid });
-		if (deleteResult.deletedCount === 0) {
-			return { message: `no document found` };
+		const userExits = await post.findOne({ _id: objectid });
+		const userId = String(event.cookies.get('user'));
+		const userCheck = userExits?.userId === userId;
+		if (userCheck) {
+			const deleteResult = await post.deleteOne({ _id: objectid });
+			if (deleteResult.deletedCount === 0) {
+				return { message: `no document found` };
+			}
+			return { message: `sucessfully deleted ${deleteResult.deletedCount}` };
 		}
-		return { message: `sucessfully deleted ${deleteResult.deletedCount}` };
+		return { message: 'not an owner of post' };
 	}
 };
