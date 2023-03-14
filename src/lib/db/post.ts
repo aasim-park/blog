@@ -3,9 +3,9 @@ import type { ObjectId } from 'mongodb';
 
 interface Post {
 	_id?: ObjectId;
-	title:string,
-    excerpt: string,
-    description: string,
-    access: string
+	title: string;
+	excerpt: string;
+	description: string;
+	access: string;
 }
 export const post = db.collection<Post>('post');
