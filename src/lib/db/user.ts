@@ -6,8 +6,8 @@ interface User {
 		username: string;
 		email: string;
 		passwordHash: string;
-		userAuthToken: string;
+		userAuthToken?: string;
 		userId: string;
 	};
 }
-export const user = db.collection<User>('user');
+export const User = db.collection<User>('user');

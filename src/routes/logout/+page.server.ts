@@ -12,8 +12,8 @@ export const load = async (event) => {
 export const actions = {
 	async default(event) {
 		try {
-			event.cookies.delete('session');
-			event.cookies.delete('user');
+			event.cookies.delete('AuthorizationToken');
+			// event.cookies.delete('user');
 			event.locals.user = null;
 			return {
 				success: true

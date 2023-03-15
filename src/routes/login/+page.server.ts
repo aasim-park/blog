@@ -1,8 +1,7 @@
-import { user } from '$db/user';
 import { loginSchema } from '$lib/validation/schema.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-import bcrypt from 'bcrypt';
+import { loginUser } from '$lib/helper/user.model';
 
 export const load = async (event) => {
 	if (event.locals.user) {
@@ -16,22 +15,28 @@ export const actions = {
 		try {
 			const signInData = loginSchema.parse(data);
 			const { email, password } = signInData;
-			const userExists = await user.findOne({ 'data.email': email });
-			if (!userExists) {
-				return fail(400, { credentials: true });
+			const { error, token } = await loginUser(email, password);
+			if (error) {
+				return {
+					err: 'Something went wrong'
+				};
 			}
-			const userPassword = await bcrypt.compare(password, userExists?.data?.passwordHash);
-			if (!userPassword) {
-				return fail(400, { credentials: true });
-			}
-			const udatedToken = await user.updateOne(
-				{
-					'data.username': userExists.data.username
-				},
-				{ $set: { 'data.userAuthToken': crypto.randomUUID() } }
-			);
-			const authenticatedUser = await user.findOne({ 'data.email': email });
-			event.cookies.set('session', authenticatedUser!.data.userAuthToken, {
+			// const userExists = await User.findOne({ 'data.email': email });
+			// if (!userExists) {
+			// 	return fail(400, { credentials: true });
+			// }
+			// const userPassword = await bcrypt.compare(password, userExists?.data?.passwordHash);
+			// if (!userPassword) {
+			// 	return fail(400, { credentials: true });
+			// }
+			// const udatedToken = await User.updateOne(
+			// 	{
+			// 		'data.username': userExists.data.username
+			// 	},
+			// 	{ $set: { 'data.userAuthToken': crypto.randomUUID() } }
+			// );
+			// const authenticatedUser = await User.findOne({ 'data.email': email });
+			event.cookies.set('AuthorizationToken', `Bearer ${token}`, {
 				// send cookie for every page
 				path: '/',
 				// server side only cookie so you can't use `document.cookie`
@@ -44,19 +49,19 @@ export const actions = {
 				// set cookie to expire after a month
 				maxAge: 60 * 60 * 24 * 30
 			});
-			event.cookies.set('user', authenticatedUser!.data.userId, {
-				// send cookie for every page
-				path: '/',
-				// server side only cookie so you can't use `document.cookie`
-				httpOnly: true,
-				// only requests from same site can send cookies
-				// https://developer.mozilla.org/en-US/docs/Glossary/CSRF
-				sameSite: 'strict',
-				// only sent over HTTPS in production
-				secure: true,
-				// set cookie to expire after a month
-				maxAge: 60 * 60 * 24 * 30
-			});
+			// event.cookies.set('user', authenticatedUser!.data.userId, {
+			// 	// send cookie for every page
+			// 	path: '/',
+			// 	// server side only cookie so you can't use `document.cookie`
+			// 	httpOnly: true,
+			// 	// only requests from same site can send cookies
+			// 	// https://developer.mozilla.org/en-US/docs/Glossary/CSRF
+			// 	sameSite: 'strict',
+			// 	// only sent over HTTPS in production
+			// 	secure: true,
+			// 	// set cookie to expire after a month
+			// 	maxAge: 60 * 60 * 24 * 30
+			// });
 			return {
 				success: true
 			};

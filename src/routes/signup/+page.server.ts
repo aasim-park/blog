@@ -1,8 +1,8 @@
 import { singupSchema } from '$lib/validation/schema.js';
-import { fail, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-import { user } from '$db/user';
-import bcrypt from 'bcrypt';
+
+import { createUser } from '$lib/helper/user.model';
 
 export const load = async (event) => {
 	if (event.locals.user) {
@@ -17,19 +17,23 @@ export const actions = {
 			const singupData = singupSchema.parse(data);
 			const { name, email, password, passwordConfirm } = singupData;
 			if (password === passwordConfirm) {
-				const userExists = await user.findOne({ 'data.email': email });
-				if (userExists?.data) {
-					return fail(400, { user: true });
+				const { error } = await createUser(name, email, password);
+				if (error) {
+					return { err: 'something went wrong' };
 				}
-				await user.insertOne({
-					data: {
-						username: name,
-						email,
-						passwordHash: await bcrypt.hash(password, 10),
-						userAuthToken: crypto.randomUUID(),
-						userId: crypto.randomUUID()
-					}
-				});
+				// const userExists = await User.findOne({ 'data.email': email });
+				// if (userExists?.data) {
+				// 	return fail(400, { user: true });
+				// }
+				// await User.insertOne({
+				// 	data: {
+				// 		username: name,
+				// 		email,
+				// 		passwordHash: await bcrypt.hash(password, 10),
+				// 		userAuthToken: crypto.randomUUID(),
+				// 		userId: crypto.randomUUID()
+				// 	}
+				// });
 				return { message: 'sucessfully created acoount' };
 			}
 			return { err: 'Password didn`t match' };
