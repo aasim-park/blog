@@ -10,3 +10,8 @@ interface Post {
 	userId: string;
 }
 export const post = db.collection<Post>('post');
+
+// interface Filter {{ $or: [{ userId: userCookie }, { access: 'Public' }] }}
+// export const getPost = async (filter: Filter) => {
+// 	return await post.find(filter).toArray();
+// };
