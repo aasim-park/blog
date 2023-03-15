@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	export let form;
 	let name = '';
 	let email = '';
 	let password = '';
+	let confirmpassword = '';
 </script>
 
 <h1>Sign Up!</h1>
@@ -14,10 +15,11 @@
 	method="POST"
 	use:enhance={({ data }) => {
 		return async ({ result }) => {
-			invalidateAll;
 			if (result.type == 'success') {
-				alert(result?.data?.message);
-				goto('/login');
+				if (result?.data?.message) {
+					alert(result?.data?.message);
+					goto('/login');
+				}
 			}
 			await applyAction(result);
 		};
@@ -71,6 +73,21 @@
 	</div>
 	{#if form?.errors?.password}
 		<span class="py-2 px-1 text-red-400">{form?.errors?.password[0]}</span>
+	{/if}
+
+	<div class="m-2">
+		<label for="confirmpassword" />
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+			type="password"
+			id="confirmpassword"
+			name="passwordConfirm"
+			placeholder="confirm password"
+			bind:value={confirmpassword}
+		/>
+	</div>
+	{#if form?.errors?.passwordConfirm}
+		<span class="py-2 px-1 text-red-400">{form?.errors?.passwordConfirm[0]}</span>
 	{/if}
 	<button
 		class="m-10 bg-colorTheme_1 hover:bg-colorTheme_1_light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
