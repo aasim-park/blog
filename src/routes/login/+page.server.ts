@@ -13,9 +13,9 @@ export const load = async (event) => {
 export const actions = {
 	default: async (event) => {
 		const data = Object.fromEntries(await event.request.formData());
-		const signInData = loginSchema.parse(data);
-		const { email, password } = signInData;
 		try {
+			const signInData = loginSchema.parse(data);
+			const { email, password } = signInData;
 			const userExists = await user.findOne({ 'data.email': email });
 			if (!userExists) {
 				return fail(400, { credentials: true });
