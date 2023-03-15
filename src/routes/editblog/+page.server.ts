@@ -5,17 +5,13 @@ import { ZodError } from 'zod';
 
 export const actions = {
 	default: async (event) => {
-		const formData = Object.fromEntries(await event.request.formData());
-		const postData = postSchema.parse(formData);
-		const title = postData.title;
-		const excerpt = postData.excerpt;
-		const description = postData.description;
-		const access = postData.access;
-		const id = postData.id;
-		const userId = String(event.cookies.get('user'));
-		if (id) {
-			const objectid = new ObjectId(id);
-			try {
+		try {
+			const formData = Object.fromEntries(await event.request.formData());
+			const postData = postSchema.parse(formData);
+			const { title, excerpt, description, access, id } = postData;
+			const userId = String(event.cookies.get('user'));
+			if (id) {
+				const objectid = new ObjectId(id);
 				const userExits = await post.findOne({ _id: objectid });
 				const userCheck = userExits?.userId === userId;
 				if (userCheck) {
@@ -26,11 +22,7 @@ export const actions = {
 					return { message: 'sucessfully updated ' };
 				}
 				return { message: 'not an owner of post' };
-			} catch (err) {
-				return { err: 'something went wrong' };
 			}
-		}
-		try {
 			await post.insertOne({ title, excerpt, description, access, userId });
 			return { message: 'sucessfully Created new Post' };
 		} catch (err) {
