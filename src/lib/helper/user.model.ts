@@ -54,7 +54,8 @@ const loginUser = async (email: string, password: string) => {
 
 	const jwtUser = {
 		id: user?.data?.userId,
-		email: user?.data?.email
+		email: user?.data?.email,
+		name: user?.data.username
 	};
 
 	const token = jwt.sign(jwtUser, SECRET_JWT_ACCESS, {

@@ -25,8 +25,8 @@
 		};
 	}}
 >
-	{#if form?.user}
-		<p class="py-2 px-1 text-red-400">Email Is is Registed already.</p>
+	{#if form?.error}
+		<p class="py-2 px-1 text-red-400">{form.error}</p>
 	{/if}
 
 	{#if form?.err}

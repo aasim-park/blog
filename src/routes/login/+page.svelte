@@ -27,8 +27,8 @@
 	{#if form?.err}
 		<span class="py-2 px-1 text-red-400">{form?.err}</span>
 	{/if}
-	{#if form?.credentials}
-		<span class="py-2 px-1 text-red-400">Creditanials doesnt match</span>
+	{#if form?.error}
+		<span class="py-2 px-1 text-red-400">{form.error}</span>
 	{/if}
 
 	<div class="m-2">

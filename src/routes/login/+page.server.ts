@@ -18,7 +18,7 @@ export const actions = {
 			const { error, token } = await loginUser(email, password);
 			if (error) {
 				return {
-					err: 'Something went wrong'
+					error
 				};
 			}
 			// const userExists = await User.findOne({ 'data.email': email });

@@ -27,10 +27,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			const sessionUser = {
 				userId: user.data.userId,
-				email: user.data.email
+				email: user.data.email,
+				name: user.data.username
 			};
 			event.locals.user = {
-				name: sessionUser.userId
+				name: sessionUser.name
 			};
 		} catch (error) {
 			console.error(error);

@@ -1,7 +1,6 @@
 import { singupSchema } from '$lib/validation/schema.js';
 import { redirect } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-
 import { createUser } from '$lib/helper/user.model';
 
 export const load = async (event) => {
@@ -19,7 +18,7 @@ export const actions = {
 			if (password === passwordConfirm) {
 				const { error } = await createUser(name, email, password);
 				if (error) {
-					return { err: 'something went wrong' };
+					return { error };
 				}
 				// const userExists = await User.findOne({ 'data.email': email });
 				// if (userExists?.data) {
