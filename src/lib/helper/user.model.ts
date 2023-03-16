@@ -44,43 +44,39 @@ const createUser = async (name: string, email: string, password: string) => {
 };
 
 const loginUser = async (email: string, password: string) => {
-	try {
-		// Check if user exists
-		// const user = await User.findOne({ 'data.email': email });
-		const user = await userRepository.search().where('email').eq(email).return.all();
+	// Check if user exists
+	// const user = await User.findOne({ 'data.email': email });
+	const user = await userRepository.search().where('email').eq(email).return.all();
 
-		if (!user) {
-			return {
-				error: 'Invalid credentials'
-			};
-		}
-
-		const userData = user[0].toJSON();
-
-		// Verify the password
-		const passwordIsValid = await bcrypt.compare(password, userData.passwordHash);
-
-		if (!passwordIsValid) {
-			return {
-				error: 'Invalid credentials'
-			};
-		}
-
-		const jwtUser = {
-			id: userData?.userId,
-			email: userData?.email,
-			name: userData?.username,
-			entityid: userData?.entityId
+	if (!user) {
+		return {
+			error: 'Invalid credentials'
 		};
-
-		const token = jwt.sign(jwtUser, SECRET_JWT_ACCESS, {
-			expiresIn: '1d'
-		});
-
-		return { token };
-	} catch (error) {
-		console.log(error);
 	}
+
+	const userData = user[0].toJSON();
+
+	// Verify the password
+	const passwordIsValid = await bcrypt.compare(password, userData.passwordHash);
+
+	if (!passwordIsValid) {
+		return {
+			error: 'Invalid credentials'
+		};
+	}
+
+	const jwtUser = {
+		id: userData?.userId,
+		email: userData?.email,
+		name: userData?.username,
+		entityid: userData?.entityId
+	};
+
+	const token = jwt.sign(jwtUser, SECRET_JWT_ACCESS, {
+		expiresIn: '1d'
+	});
+
+	return { token };
 };
 
 export { createUser, loginUser };
