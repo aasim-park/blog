@@ -9,9 +9,9 @@ interface Post {
 	userId: string;
 }
 export const load: PageServerLoad = async function (event) {
-	const userCookie = event.cookies.get('user');
-	if (userCookie) {
-		const data = await post.find({ $or: [{ userId: userCookie }, { access: 'Public' }] }).toArray();
+	const userEsxits = event?.locals?.user?.id;
+	if (userEsxits) {
+		const data = await post.find({ $or: [{ userId: userEsxits }, { access: 'Public' }] }).toArray();
 		const parseData: Post[] = await JSON.parse(JSON.stringify(data));
 		return {
 			posts: parseData,

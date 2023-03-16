@@ -31,7 +31,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 				name: user.data.username
 			};
 			event.locals.user = {
-				name: sessionUser.name
+				name: sessionUser.name,
+				id: sessionUser.userId
 			};
 		} catch (error) {
 			console.error(error);
