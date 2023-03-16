@@ -3,6 +3,7 @@ import type { Handle } from '@sveltejs/kit';
 import { User } from '$db/user';
 import { SECRET_JWT_ACCESS } from '$env/static/private';
 import jwt from 'jsonwebtoken';
+import { userRepository } from '$lib/validation/redis_schema';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const authCookie = event.cookies.get('AuthorizationToken');
@@ -16,19 +17,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 			if (typeof jwtUser === 'string') {
 				throw new Error('Something went wrong');
 			}
-
-			const user = await User.findOne({
-				'data.userId': jwtUser.id
-			});
+			// const user = await User.findOne({
+			// 	'data.userId': jwtUser.id
+			// });
+			const user = (await userRepository.fetch(jwtUser.entityid)).toJSON();
 
 			if (!user) {
 				throw new Error('User not found');
 			}
 
 			const sessionUser = {
-				userId: user.data.userId,
-				email: user.data.email,
-				name: user.data.username
+				userId: user.userId,
+				email: user.email,
+				name: user.username
 			};
 			event.locals.user = {
 				name: sessionUser.name,
